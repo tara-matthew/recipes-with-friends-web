@@ -10,8 +10,10 @@
     "express:run": "vue-cli-service express:run"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^3.1.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
@@ -32,7 +34,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+        "no-console" : "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
