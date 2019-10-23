@@ -1,26 +1,45 @@
 <template>
-    <div>
-        <h1>Register</h1>
+    <v-container fill-height>
+        <v-card width="650" class="mx-auto py-5">
 
-        <input
-            type="email"
-            name="email"
-            v-model="email"
-            placeholder="email" />
-        <br>
+            <v-card-title class="justify-center">
+                <h1 class="display-2 font-weight-thin">Let's get cooking!</h1>
+            </v-card-title>
 
-        <input
-            type="password"
-            name="password"
-            v-model="password"
-            placeholder="password" />
-        <br>
+            <v-card-text>
+                <v-form>
+                    <v-text-field
+                        type="email"
+                        name="email"
+                        v-model="email"
+                        placeholder="email"
+                        prepend-icon="mdi-email" />
 
-        <button
-            @click="register">
-            Register
-        </button>
-    </div>
+                    <v-text-field
+                        type="password"
+                        name="password"
+                        v-model="password"
+                        placeholder="password"
+                        prepend-icon="mdi-lock" />
+
+                </v-form>
+            </v-card-text>
+
+            <v-card-actions class="justify-center">
+                <v-btn
+                    color="success"
+                    @click="register"
+                    class="mb-3">
+                    Register
+                </v-btn>
+            </v-card-actions>
+
+            <div class="danger-alert" v-html="error">ERROR</div>
+
+
+
+        </v-card>
+    </v-container>
 </template>
 
 
@@ -32,18 +51,21 @@
         data() {
             return {
                 email: '',
-                password: ''
+                password: '',
+                error: null
             }
         },
         methods: {
             async register() {
-                console.log("button clicked")
-                const response = await AuthenticationService.register({
-                    email: this.email,
-                    password: this.password
-                })
-
-                console.log(response.data)
+                try {
+                    const response = await AuthenticationService.register({
+                        email: this.email,
+                        password: this.password
+                    })
+                    console.log(response.data)
+                } catch(error) {
+                    this.error = error.response.data.error
+                }
             }
         }
     }
@@ -66,4 +88,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>
