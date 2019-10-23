@@ -21,7 +21,7 @@ module.exports = {
 
                 case 'password':
                     res.status(400).send({
-                        error: `Please make sure that password only contains lower case, upper case, and numbers and is between 8 and 32 characters long.`
+                        error: `Please make sure that your password only contains letters and numbers, and is between 8 and 32 characters long.`
                     })
                     break
 
