@@ -17,43 +17,89 @@
             </v-toolbar-items>
         </v-toolbar>
 
-        <v-container fill-height>
-            <v-row>
+        <v-container fill-height fluid>
+            <v-row class="half-viewport-height">
                 <v-col
                     cols="12"
                     md="6"
+                    height="100%"
                     class="mt-12">
-                    <v-card height="400">
-                        <v-card-title>Hello</v-card-title>
+                    <v-card
+                        height="100%"
+                        class="site-padding-left">
+
+                        <v-toolbar
+                            class="my-toolbar"
+                            color="#099E7A">
+                            <v-toolbar-title class="panel-title">Recently Viewed</v-toolbar-title>
+                        </v-toolbar>
+
+                        <v-data-table
+                            items-per-page="5"
+                            hide-default-header
+                            hide-default-footer>
+                        </v-data-table>
                     </v-card>
                 </v-col>
 
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-12">
-                    <v-card height="400">
-                        <v-card-title>Hello</v-card-title>
+                    height="50%"
+                    class="mt-12"
+                    align-self="center">
+                    <v-card
+                        class="site-padding-right"
+                        height="50%">
+                        <v-toolbar
+                            class="my-toolbar"
+                            color="#036F55">
+                            <v-toolbar-title class="panel-title">Search</v-toolbar-title>
+                        </v-toolbar>
+                        <v-text-field
+                            label="Search by song title, artist, album, or genre"
+                            v-model="search">
+                        </v-text-field>
                     </v-card>
                 </v-col>
             </v-row>
 
-            <v-row>
+            <v-row class="half-viewport-height">
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-12">
-                    <v-card height="400">
-                        <v-card-title>Hello</v-card-title>
+                    class="mt-12"
+                    height="100%">
+                    <v-card
+                        height="100%"
+                        class="site-padding-left">
+                        <v-toolbar
+                            class="my-toolbar"
+                            color="#11CA9D">
+                            <v-toolbar-title class="panel-title">Just Added</v-toolbar-title>
+                        </v-toolbar>
+
+                        <v-data-table
+                            items-per-page="5"
+                            hide-default-header
+                            hide-default-footer>
+                        </v-data-table>
                     </v-card>
                 </v-col>
 
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-12">
-                    <v-card height="400">
-                        <v-card-title>Hello</v-card-title>
+                    class="mt-12"
+                    height="100%">
+                    <v-card
+                        height="100%"
+                        class="site-padding-right">
+                        <v-toolbar
+                            class="my-toolbar"
+                            color="#08AC84">
+                            <v-toolbar-title class="panel-title">Favourites</v-toolbar-title>
+                        </v-toolbar>
                     </v-card>
                 </v-col>
             </v-row>
@@ -79,5 +125,23 @@ export default {
         padding-left:25px;
         padding-right:25px;
     }
+
+    .site-padding-left {
+        margin-left: 25px;
+    }
+
+    .site-padding-right {
+        margin-right: 25px;
+    }
+
+    .panel-title {
+        text-align: center;
+        width: 100%;
+    }
+
+    .half-viewport-height {
+        height: 40vh;
+    }
+
 
 </style>
