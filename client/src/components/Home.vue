@@ -23,7 +23,7 @@
                     cols="12"
                     md="6"
                     height="100%"
-                    class="mt-12">
+                    class="mt-0">
                     <v-card
                         height="100%"
                         class="site-padding-left">
@@ -35,7 +35,9 @@
                         </v-toolbar>
 
                         <v-data-table
-                            items-per-page="5"
+                            class="custom-data-table"
+                            :headers="headers"
+                            :items="recentlyViewed"
                             hide-default-header
                             hide-default-footer>
                         </v-data-table>
@@ -46,7 +48,7 @@
                     cols="12"
                     md="6"
                     height="50%"
-                    class="mt-12"
+                    class="mt-0"
                     align-self="center">
                     <v-card
                         class="site-padding-right"
@@ -57,7 +59,8 @@
                             <v-toolbar-title class="panel-title">Search</v-toolbar-title>
                         </v-toolbar>
                         <v-text-field
-                            label="Search by song title, artist, album, or genre"
+                            class="px-8"
+                            label="Search by title, ingredient, cuisine, mood, or Caroline"
                             v-model="search">
                         </v-text-field>
                     </v-card>
@@ -68,10 +71,11 @@
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-12"
+                    class="mt-0"
                     height="100%">
                     <v-card
                         height="100%"
+
                         class="site-padding-left">
                         <v-toolbar
                             class="my-toolbar"
@@ -80,7 +84,9 @@
                         </v-toolbar>
 
                         <v-data-table
-                            items-per-page="5"
+                            class="custom-data-table"
+                            :headers="headers"
+                            :items="recentlyViewed"
                             hide-default-header
                             hide-default-footer>
                         </v-data-table>
@@ -90,7 +96,7 @@
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-12"
+                    class="mt-0"
                     height="100%">
                     <v-card
                         height="100%"
@@ -100,6 +106,14 @@
                             color="#08AC84">
                             <v-toolbar-title class="panel-title">Favourites</v-toolbar-title>
                         </v-toolbar>
+
+                        <v-data-table
+                            class="custom-data-table"
+                            :headers="headers"
+                            :items="recentlyViewed"
+                            hide-default-header
+                            hide-default-footer>
+                        </v-data-table>
                     </v-card>
                 </v-col>
             </v-row>
@@ -110,7 +124,33 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            headers: [
+                {
+                    text: 'Meal',
+                    value: 'name'
+                }
+            ],
+            recentlyViewed: [
+                {
+                    name: 'Sexy ramen'
+                },
+                {
+                    name: "Caroline's butt"
+                },
+                {
+                    name: 'Roasted vegetable cous cous'
+                },
+                {
+                    name: 'Caroline'
+                },
+                {
+                    name: "Caroline's face"
+                }
+            ]
+        }
+    }
 }
 </script>
 
@@ -137,11 +177,38 @@ export default {
     .panel-title {
         text-align: center;
         width: 100%;
+        color: white;
+        font-family: "Segoe UI";
+        font-size: 24px;
     }
 
     .half-viewport-height {
         height: 40vh;
+        margin-bottom: 10vh;
     }
+
+    >>>.v-data-table td{
+        font-size: 17px;
+    }
+
+    >>>.v-data-table table{
+        height: 39vh;
+    }
+
+     >>>.v-data-table td{
+        height: 20%;
+    }
+
+     >>>.v-data-table tr {
+        height: 20%;
+    }
+
+
+    html {
+        height: 100%;
+    }
+
+    body { min-height: 100%; }
 
 
 </style>
