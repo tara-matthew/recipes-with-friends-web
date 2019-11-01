@@ -183,8 +183,8 @@ export default {
     }
 
     .half-viewport-height {
-        height: 40vh;
-        margin-bottom: 10vh;
+        height: 38vh;
+        margin-bottom: 6vh;
     }
 
     >>>.v-data-table td{
@@ -192,7 +192,7 @@ export default {
     }
 
     >>>.v-data-table table{
-        height: 39vh;
+        height: 30vh;
     }
 
      >>>.v-data-table td{
