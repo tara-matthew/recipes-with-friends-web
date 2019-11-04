@@ -18,14 +18,10 @@
         </v-toolbar>
 
         <v-container fill-height fluid>
-            <v-row class="half-viewport-height">
+            <v-row class="half-viewport-height first">
                 <v-col
-                    cols="12"
-                    md="6"
-                    height="100%"
-                    class="mt-0">
+                    cols="6">
                     <v-card
-                        height="100%"
                         class="site-padding-left">
 
                         <v-toolbar
@@ -69,13 +65,9 @@
 
             <v-row class="half-viewport-height">
                 <v-col
-                    cols="12"
-                    md="6"
-                    class="mt-0"
-                    height="100%">
+                    cols="6"
+                    class="mt-0 bottom-column">
                     <v-card
-                        height="100%"
-
                         class="site-padding-left">
                         <v-toolbar
                             class="my-toolbar"
@@ -96,10 +88,8 @@
                 <v-col
                     cols="12"
                     md="6"
-                    class="mt-0"
-                    height="100%">
+                    class="mt-0 bottom-column">
                     <v-card
-                        height="100%"
                         class="site-padding-right">
                         <v-toolbar
                             class="my-toolbar"
@@ -108,6 +98,7 @@
                         </v-toolbar>
 
                         <v-data-table
+                            height="inherit"
                             class="custom-data-table"
                             :headers="headers"
                             :items="recentlyViewed"
@@ -183,16 +174,15 @@ export default {
     }
 
     .half-viewport-height {
-        height: 38vh;
-        margin-bottom: 6vh;
+        height: 41vh;
     }
 
-    >>>.v-data-table td{
-        font-size: 17px;
+    .half-viewport-height.first {
+        margin-bottom: 24px;
     }
 
     >>>.v-data-table table{
-        height: 30vh;
+    height: 31vh;
     }
 
      >>>.v-data-table td{
@@ -203,12 +193,20 @@ export default {
         height: 20%;
     }
 
-
-    html {
-        height: 100%;
+    .bottom-column {
+        margin-bottom: 12px;
     }
 
-    body { min-height: 100%; }
+    @media screen and (min-height: 800px) {
+        >>>.v-data-table table{
+        height: 35vh;
+        }
+
+        .half-viewport-height.first {
+            margin-bottom: 50px;
+        }
+    }
+
 
 
 </style>
