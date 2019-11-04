@@ -23,8 +23,19 @@
         </div>
 
         <div class="box ingredients-box">
-            <div class="inner-div">
+            <div class="ingredients-inner-div">
+                <h1 class=centred>Ingredients</h1>
+                <ul>
+                    <li>
+                        Sexy tasty Caroline
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="box tips-box">
+            <div class="tips-inner-div">
+                <h1 class=centred>Hot tips!</h1>
             </div>
         </div>
     </div>
@@ -77,23 +88,38 @@ export default {
     }
 
     .box {
-        border: 1px solid #444;
+        border: 1px solid black;
     }
 
     .title-box {
         grid-column: 2/12;
-        grid-row: 2/4;
+        grid-row: 2/5;
     }
 
     .ingredients-box {
-        grid-column: 2/7;
-        grid-row: 4/10;
+        grid-column: 2/6;
+        grid-row: 5/11;
     }
 
-    .inner-div {
-        border: 1px solid #444;
-        padding: 20px;
+    .tips-box {
+        grid-column: 7/12;
+        grid-row: 5/11;
+        padding: 1px;
+    }
 
+    .ingredients-inner-div {
+        /* border: 2px solid black; */
+        height: 100%;
+    }
+
+    .tips-inner-div {
+        height: 100%;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .centred {
+        text-align: center;
     }
 
 </style>
