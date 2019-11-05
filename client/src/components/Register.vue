@@ -9,6 +9,13 @@
             <v-card-text>
                 <v-form>
                     <v-text-field
+                        type="firstName"
+                        name="firstName"
+                        v-model="firstName"
+                        placeholder="first name"
+                        prepend-icon="mdi-account"/>
+
+                    <v-text-field
                         type="email"
                         name="email"
                         v-model="email"
@@ -52,6 +59,7 @@
             return {
                 email: '',
                 password: '',
+                firstName: '',
                 error: null
             }
         },
@@ -60,12 +68,18 @@
                 try {
                     const response = await AuthenticationService.register({
                         email: this.email,
-                        password: this.password
+                        password: this.password,
+                        firstName: this.firstName
                     })
+                    console.log(response)
                     this.$store.dispatch('setToken', response.data.token)
                     this.$store.dispatch('setUser', response.data.user)
                     console.log(response.data)
+                    this.$router.push({
+                        name: 'home'
+                    })
                 } catch(error) {
+                    console.log(error)
                     this.error = error.response.data.error
                 }
             }
