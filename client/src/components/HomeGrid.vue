@@ -17,17 +17,69 @@
             </v-toolbar-items>
         </v-toolbar>
 
-        <div class="box recently-viewed">
-        </div>
+        <v-card :elevation="2" class="box recently-viewed">
+            <v-toolbar
+                class="my-toolbar"
+                color="#099E7A">
+                <v-toolbar-title class="panel-title">Recently Viewed</v-toolbar-title>
+            </v-toolbar>
 
-        <div class="box search">
-        </div>
+            <v-data-table
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                height="inherit"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
 
-        <div class="box just-added">
-        </div>
+        <v-card :elevation="2" class="box search">
+            <v-toolbar
+                class="my-toolbar"
+                color="#036F55">
+                <v-toolbar-title class="panel-title">Search</v-toolbar-title>
+            </v-toolbar>
+            <v-text-field
+                class="px-8"
+                label="Search by title, ingredient, cuisine, mood, or Caroline"
+                v-model="search">
+            </v-text-field>
+        </v-card>
 
-        <div class="box favourites">
-        </div>
+        <v-card :elevation="2" class="box just-added">
+            <v-toolbar
+                class="my-toolbar"
+                color="#099E7A">
+                <v-toolbar-title class="panel-title">Just Added</v-toolbar-title>
+            </v-toolbar>
+
+            <v-data-table
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                height="inherit"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
+
+        <v-card :elevation="2" class="box favourites">
+            <v-toolbar
+                class="my-toolbar"
+                color="#08AC84">
+                <v-toolbar-title class="panel-title">Favourites</v-toolbar-title>
+            </v-toolbar>
+
+            <v-data-table
+                height="inherit"
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
 
     </div>
 </template>
@@ -105,19 +157,23 @@ export default {
     }
 
     .box {
-        border: 1px solid black;
+        border-radius: 4px;
     }
 
      .recently-viewed {
         grid-column: 1/7;
         grid-row: 2/2;
         margin-left: 20px;
+        /* border: 1px solid black; */
+
     }
 
     .search {
         grid-column: 7/13;
         grid-row: 2/2;
         margin-right: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
 
     }
 
@@ -132,7 +188,7 @@ export default {
         grid-column: 7/13;
         grid-row: 3/3;
         margin-right: 20px;
-        
+
     }
 
     .half-viewport-height {
@@ -143,23 +199,31 @@ export default {
         margin-bottom: 24px;
     }
 
+    >>>.v-data-table td{
+       height: 20%;
+   }
+
+    >>>.v-data-table tr {
+       height: 20%;
+   }
+
     >>>.v-data-table table{
-    height: 31vh;
+    height: 100%;
     }
 
-     >>>.v-data-table td{
-        height: 20%;
+    >>>.theme--light.v-data-table {
+        height: calc(100% - 64px);
     }
 
-     >>>.v-data-table tr {
-        height: 20%;
+    >>>.v-data-table--fixed-height .v-data-table__wrapper {
+        height: 100% !important;
     }
 
     .bottom-column {
         margin-bottom: 12px;
     }
 
-    @media screen and (min-height: 800px) {
+    /* @media screen and (min-height: 800px) {
         >>>.v-data-table table{
         height: 35vh;
         }
@@ -167,7 +231,7 @@ export default {
         .half-viewport-height.first {
             margin-bottom: 50px;
         }
-    }
+    } */
 
 
 
