@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
 
         <v-toolbar color="#92D1C2" class="padded-toolbar">
             <v-toolbar-title>Recipes With Friends</v-toolbar-title>
@@ -11,104 +11,97 @@
 
             <v-spacer></v-spacer>
 
-            <v-toolbar-items>
-                <v-btn text>Sign Out</v-btn>
-                <v-btn text class="font-weight-bold">Tara</v-btn>
+            <v-toolbar-items
+                v-if="$store.state.isUserLoggedIn">
+                <v-btn
+                    text>
+                    Sign Out
+                </v-btn>
+
+                <v-btn
+                    text
+                    class="font-weight-bold">
+                    {{$store.state.user.firstName}}
+                </v-btn>
+            </v-toolbar-items>
+
+            <v-toolbar-items
+                v-else>
+
+                <v-btn
+                    text>
+                    Login
+                </v-btn>
+                <v-btn
+                    text>
+                    Register
+                </v-btn>
             </v-toolbar-items>
         </v-toolbar>
 
-        <v-container fill-height fluid>
-            <v-row class="half-viewport-height first">
-                <v-col
-                    cols="6">
-                    <v-card
-                        class="site-padding-left">
+        <v-card :elevation="2" class="box recently-viewed">
+            <v-toolbar
+                class="my-toolbar"
+                color="#099E7A">
+                <v-toolbar-title class="panel-title">Recently Viewed</v-toolbar-title>
+            </v-toolbar>
 
-                        <v-toolbar
-                            class="my-toolbar"
-                            color="#099E7A">
-                            <v-toolbar-title class="panel-title">Recently Viewed</v-toolbar-title>
-                        </v-toolbar>
+            <v-data-table
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                height="inherit"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
 
-                        <v-data-table
-                            class="custom-data-table"
-                            :headers="headers"
-                            :items="recentlyViewed"
-                            hide-default-header
-                            hide-default-footer>
-                        </v-data-table>
-                    </v-card>
-                </v-col>
+        <v-card :elevation="2" class="box search">
+            <v-toolbar
+                class="my-toolbar"
+                color="#036F55">
+                <v-toolbar-title class="panel-title">Search</v-toolbar-title>
+            </v-toolbar>
+            <v-text-field
+                class="px-8"
+                label="Search by title, ingredient, cuisine, mood, or Caroline"
+                v-model="search">
+            </v-text-field>
+        </v-card>
 
-                <v-col
-                    cols="12"
-                    md="6"
-                    height="50%"
-                    class="mt-0"
-                    align-self="center">
-                    <v-card
-                        class="site-padding-right"
-                        height="50%">
-                        <v-toolbar
-                            class="my-toolbar"
-                            color="#036F55">
-                            <v-toolbar-title class="panel-title">Search</v-toolbar-title>
-                        </v-toolbar>
-                        <v-text-field
-                            class="px-8"
-                            label="Search by title, ingredient, cuisine, mood, or Caroline"
-                            v-model="search">
-                        </v-text-field>
-                    </v-card>
-                </v-col>
-            </v-row>
+        <v-card :elevation="2" class="box just-added">
+            <v-toolbar
+                class="my-toolbar"
+                color="#099E7A">
+                <v-toolbar-title class="panel-title">Just Added</v-toolbar-title>
+            </v-toolbar>
 
-            <v-row class="half-viewport-height">
-                <v-col
-                    cols="6"
-                    class="mt-0 bottom-column">
-                    <v-card
-                        class="site-padding-left">
-                        <v-toolbar
-                            class="my-toolbar"
-                            color="#11CA9D">
-                            <v-toolbar-title class="panel-title">Just Added</v-toolbar-title>
-                        </v-toolbar>
+            <v-data-table
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                height="inherit"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
 
-                        <v-data-table
-                            class="custom-data-table"
-                            :headers="headers"
-                            :items="recentlyViewed"
-                            hide-default-header
-                            hide-default-footer>
-                        </v-data-table>
-                    </v-card>
-                </v-col>
+        <v-card :elevation="2" class="box favourites">
+            <v-toolbar
+                class="my-toolbar"
+                color="#08AC84">
+                <v-toolbar-title class="panel-title">Favourites</v-toolbar-title>
+            </v-toolbar>
 
-                <v-col
-                    cols="12"
-                    md="6"
-                    class="mt-0 bottom-column">
-                    <v-card
-                        class="site-padding-right">
-                        <v-toolbar
-                            class="my-toolbar"
-                            color="#08AC84">
-                            <v-toolbar-title class="panel-title">Favourites</v-toolbar-title>
-                        </v-toolbar>
-
-                        <v-data-table
-                            height="inherit"
-                            class="custom-data-table"
-                            :headers="headers"
-                            :items="recentlyViewed"
-                            hide-default-header
-                            hide-default-footer>
-                        </v-data-table>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
+            <v-data-table
+                height="inherit"
+                class="custom-data-table"
+                :headers="headers"
+                :items="recentlyViewed"
+                hide-default-header
+                hide-default-footer>
+            </v-data-table>
+        </v-card>
 
     </div>
 </template>
@@ -141,6 +134,10 @@ export default {
                 }
             ]
         }
+    },
+
+    mounted() {
+        console.log(this.$store.state.user.firstName)
     }
 }
 </script>
@@ -155,6 +152,8 @@ export default {
     .padded-toolbar {
         padding-left:25px;
         padding-right:25px;
+        grid-column: 1/13;
+
     }
 
     .site-padding-left {
@@ -173,6 +172,51 @@ export default {
         font-size: 24px;
     }
 
+    .wrapper {
+        display: grid;
+        height: 100vh;
+        padding-bottom: 40px;
+        grid-template-columns: repeat(12, [col-start] 1fr);
+        grid-template-rows: 64px auto auto;
+        grid-column-gap: 20px;
+        grid-row-gap: 40px;
+    }
+
+    .box {
+        border-radius: 4px;
+    }
+
+     .recently-viewed {
+        grid-column: 1/7;
+        grid-row: 2/2;
+        margin-left: 20px;
+        /* border: 1px solid black; */
+
+    }
+
+    .search {
+        grid-column: 7/13;
+        grid-row: 2/2;
+        margin-right: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+
+    }
+
+    .just-added {
+        grid-column: 1/7;
+        grid-row: 3/3;
+        margin-left: 20px;
+
+    }
+
+    .favourites {
+        grid-column: 7/13;
+        grid-row: 3/3;
+        margin-right: 20px;
+
+    }
+
     .half-viewport-height {
         height: 41vh;
     }
@@ -181,23 +225,31 @@ export default {
         margin-bottom: 24px;
     }
 
+    >>>.v-data-table td{
+       height: 20%;
+   }
+
+    >>>.v-data-table tr {
+       height: 20%;
+   }
+
     >>>.v-data-table table{
-    height: 31vh;
+    height: 100%;
     }
 
-     >>>.v-data-table td{
-        height: 20%;
+    >>>.theme--light.v-data-table {
+        height: calc(100% - 64px);
     }
 
-     >>>.v-data-table tr {
-        height: 20%;
+    >>>.v-data-table--fixed-height .v-data-table__wrapper {
+        height: 100% !important;
     }
 
     .bottom-column {
         margin-bottom: 12px;
     }
 
-    @media screen and (min-height: 800px) {
+    /* @media screen and (min-height: 800px) {
         >>>.v-data-table table{
         height: 35vh;
         }
@@ -205,7 +257,7 @@ export default {
         .half-viewport-height.first {
             margin-bottom: 50px;
         }
-    }
+    } */
 
 
 
