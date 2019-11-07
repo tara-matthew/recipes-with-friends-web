@@ -1,8 +1,7 @@
 const AuthenticationController = require ('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require ('./policies/AuthenticationControllerPolicy')
 const UploadController = require ('./controllers/UploadController')
-const multer = require('multer')
-const upload = multer( { dest: 'uploads/' } );
+
 
 module.exports = (app) => {
     app.post('/register',
@@ -13,7 +12,7 @@ module.exports = (app) => {
         AuthenticationController.login)
 
 
-    app.post( '/upload', upload.single( 'file' ),
+    app.post('/upload',
         UploadController.upload
     )
     // app.post('/upload',
