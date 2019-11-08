@@ -22,11 +22,18 @@
                     cols="10"
                     offset-md="1">
                     <v-card class="first-card">
-                        <h1 class="page-title">New Recipe</h1>
+
+                        <v-toolbar
+                            class="my-toolbar"
+                            color="#099E7A">
+                            <v-toolbar-title class="panel-title">New Recipe</v-toolbar-title>
+                        </v-toolbar>
+                        <!-- <h1 class="page-title">New Recipe</h1> -->
                         <v-row>
                             <v-col
-                                cols="6"
-                                md="6">
+                                class="px-12 py-12"
+                                cols="5"
+                                md="5">
 
                                 <v-text-field
                                     outlined
@@ -42,9 +49,20 @@
                             </v-col>
 
                             <v-col
-                                md="6"
-                                cols="6">
-                                <vue-dropzone ref="vueDropzone" id="drop1" :options="dropOptions" @vdropzone-file-added="dropzoneChangeUrl"></vue-dropzone>
+                                class="center-aligned px-12 py-12"
+                                md="7"
+                                cols="7">
+                                <vue-dropzone
+                                    ref="vueDropzone"
+                                    id="drop1"
+                                    :options="dropOptions"
+                                    :useCustomSlot=true
+                                    @vdropzone-file-added="dropzoneChangeUrl">
+                                    <div class="dropzone-text-container">
+                                        <h3 class="green-colour">Drag and drop your photos here</h3>
+                                        <div>...or click to upload from your computer</div>
+                                    </div>
+                                </vue-dropzone>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -116,6 +134,14 @@ export default {
         font-family: "Segoe UI";
     }
 
+    .panel-title {
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-family: "Segoe UI";
+        font-size: 24px;
+    }
+
     >>>.v-input__slot .v-label {
         color: #099E7A;
     }
@@ -125,9 +151,9 @@ export default {
     }
 
     .first-card {
-        padding-left: 45px;
+        /* padding-left: 45px;
         padding-right: 45px;
-        padding-top: 25px;
+        padding-top: 25px; */
         background: #F7F7F7;
         margin-bottom: 20px;
     }
@@ -135,6 +161,29 @@ export default {
     .left-aligned-card {
         width: 50%;
         display: inline-block;
+    }
+
+    .green-colour {
+        color: #099E7A;
+    }
+
+    .dropzone {
+        min-height: 276px;
+        max-height: 276px;
+        overflow: auto;
+        background: #F7F7F7;
+        position: relative;
+    }
+
+    .center-aligned {
+        /* align-self: center; */
+    }
+
+    .dropzone-text-container {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        left: 50%;
     }
 
     /* .story >>>.v-input__slot .v-label{
