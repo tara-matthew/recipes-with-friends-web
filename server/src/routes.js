@@ -1,7 +1,7 @@
 const AuthenticationController = require ('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require ('./policies/AuthenticationControllerPolicy')
 const UploadController = require ('./controllers/UploadController')
-
+const RecipeController = require ('./controllers/RecipeController')
 
 module.exports = (app) => {
     app.post('/register',
@@ -11,10 +11,11 @@ module.exports = (app) => {
     app.post('/login',
         AuthenticationController.login)
 
-
     app.post('/upload',
         UploadController.upload
     )
-    // app.post('/upload',
-    //     UploadController.upload)
+
+    app.post('/recipes',
+        RecipeController.post)
+
 }
