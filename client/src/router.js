@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import GridView from '@/components/GridView'
 import ViewRecipe from '@/components/ViewRecipe'
+import AddRecipe from '@/components/AddRecipe'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
             path: '/viewrecipe',
             name: 'viewRecipe',
             component: ViewRecipe
+        },
+        {
+            path: '/addrecipe',
+            name: 'addRecipe',
+            component: AddRecipe
         }
     ]
 })
