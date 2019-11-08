@@ -28,28 +28,38 @@
                             color="#099E7A">
                             <v-toolbar-title class="panel-title">New Recipe</v-toolbar-title>
                         </v-toolbar>
-                        <!-- <h1 class="page-title">New Recipe</h1> -->
                         <v-row>
                             <v-col
-                                class="px-12 py-12"
+                                class="px-12 pt-12"
                                 cols="5"
                                 md="5">
 
                                 <v-text-field
                                     outlined
                                     label="What did you make?"
-                                    placeholder="Sexy Ramen" />
+                                    placeholder="Sexy Ramen"
+                                    v-model="recipe.title" />
 
                                 <v-textarea
                                     auto-grow
                                     class="story"
                                     placeholder="It was very sexy"
                                     label="What's the story?"
-                                    outlined />
+                                    outlined
+                                    v-model="recipe.story" />
+
+                                <v-card-actions class="justify-center">
+                                    <v-btn
+                                        color="#099E7A"
+                                        class="mb-3 white--text"
+                                        @click="saveRecipe">
+                                        Save
+                                    </v-btn>
+                                </v-card-actions>
                             </v-col>
 
                             <v-col
-                                class="center-aligned px-12 py-12"
+                                class="center-aligned px-12 pt-12"
                                 md="7"
                                 cols="7">
                                 <vue-dropzone
@@ -59,7 +69,7 @@
                                     :useCustomSlot=true
                                     @vdropzone-file-added="dropzoneChangeUrl">
                                     <div class="dropzone-text-container">
-                                        <h3 class="green-colour">Drag and drop your photos here</h3>
+                                        <h3 class="green-colour">Send your favourite noodz here</h3>
                                         <div>...or click to upload from your computer</div>
                                     </div>
                                 </vue-dropzone>
@@ -79,6 +89,8 @@
                     </v-card>
                 </v-col>
 
+
+
             </v-row>
         </v-container>
 
@@ -89,6 +101,7 @@
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import AuthenticationService from '@/services/AuthenticationService'
+import RecipeService from '@/services/RecipeService'
 
 
 export default {
@@ -102,7 +115,12 @@ export default {
                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-File-Name, X-File-Size, X-File-Type',
                'Content-Type': 'application/x-www-form-urlencoded'
            },
-        }
+       },
+       recipe: {
+           title: '',
+           story: '',
+       },
+       error: null
     }),
     components: {
         vueDropzone: vue2Dropzone
@@ -110,6 +128,14 @@ export default {
     methods: {
         async dropzoneChangeUrl(file) {
             await AuthenticationService.upload(file)
+        },
+
+        async saveRecipe() {
+            try {
+                await RecipeService.post(this.recipe)
+            } catch(error) {
+                console.log(error)
+            }
         }
     }
 }
