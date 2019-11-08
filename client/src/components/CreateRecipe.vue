@@ -48,6 +48,10 @@
                                     outlined
                                     v-model="recipe.story" />
 
+                                <div class="danger-alert" v-if="error">
+                                    {{error}}
+                                </div>
+
                                 <v-card-actions class="justify-center">
                                     <v-btn
                                         color="#099E7A"
@@ -131,6 +135,15 @@ export default {
         },
 
         async saveRecipe() {
+            this.error = null
+            const hasTitle = (Object
+                .values(this.recipe)[0].length) > 0
+
+            if (!hasTitle) {
+                this.error = 'Your recipe needs a title'
+                return
+            }
+
             try {
                 await RecipeService.post(this.recipe)
             } catch(error) {
@@ -174,6 +187,10 @@ export default {
 
     >>>.v-input__slot {
         margin-bottom: 63px;
+    }
+
+    .story>>>.v-input__slot {
+        margin-bottom: 21px;
     }
 
     .first-card {
