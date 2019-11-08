@@ -20,19 +20,4 @@ module.exports = {
             })
         }
     }
-     // upload(req, res) {
-     //     uploadDest(req,res,function(err) {
-     //         console.log(req)
-     //         if (err) {
-     //             return res.send('fail')
-     //         } else {
-     //             console.log(req.file)
-     //             return res.send('success')
-     //         }
-     //     })
-     //     // console.log(upload)
-     //    // console.log(req.file)
-     //    // res.send(req.file)
-     //
-     // }
 }
