@@ -44,7 +44,7 @@
                             <v-col
                                 md="6"
                                 cols="6">
-                                <vue-dropzone ref="vueDropzone" id="drop1" :options="dropOptions"></vue-dropzone>
+                                <vue-dropzone ref="vueDropzone" id="drop1" :options="dropOptions" @vdropzone-file-added="dropzoneChangeUrl"></vue-dropzone>
                             </v-col>
                         </v-row>
                     </v-card>
@@ -70,7 +70,7 @@
 <script>
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-// import AuthenticationService from '@/services/AuthenticationService'
+import AuthenticationService from '@/services/AuthenticationService'
 
 
 export default {
@@ -90,11 +90,9 @@ export default {
         vueDropzone: vue2Dropzone
     },
     methods: {
-        // async dropzoneChangeUrl(file) {
-        //     console.log(file)
-        //     await AuthenticationService.upload(file)
-        //     // this.$refs.vueDropzone.setOption('url', url)
-        // }
+        async dropzoneChangeUrl(file) {
+            await AuthenticationService.upload(file)
+        }
     }
 }
 </script>
