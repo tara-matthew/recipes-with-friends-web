@@ -29,11 +29,17 @@
                 v-else>
 
                 <v-btn
-                    text>
+                    text
+                    :to="{
+                    name: 'login'
+                    }">
                     Login
                 </v-btn>
                 <v-btn
-                    text>
+                    text
+                    :to="{
+                    name: 'register'
+                    }">
                     Register
                 </v-btn>
             </v-toolbar-items>
@@ -69,7 +75,7 @@
             </v-text-field>
         </v-card>
 
-        <v-card :elevation="2" class="box just-added">
+        <v-card :elevation="2" class="box recently-added">
             <v-toolbar
                 class="my-toolbar"
                 color="#099E7A">
@@ -79,7 +85,7 @@
             <v-data-table
                 class="custom-data-table"
                 :headers="headers"
-                :items="recentlyViewed"
+                :items="justAdded"
                 height="inherit"
                 hide-default-header
                 hide-default-footer>
@@ -132,13 +138,11 @@ export default {
                 {
                     name: "Caroline's face"
                 }
-            ]
+            ],
+
+            justAdded: []
         }
     },
-
-    mounted() {
-        console.log(this.$store.state.user.firstName)
-    }
 }
 </script>
 
@@ -189,7 +193,7 @@ export default {
      .recently-viewed {
         grid-column: 1/7;
         grid-row: 2/2;
-        margin-left: 20px;
+        margin-left: 39px;
         /* border: 1px solid black; */
 
     }
@@ -197,23 +201,23 @@ export default {
     .search {
         grid-column: 7/13;
         grid-row: 2/2;
-        margin-right: 20px;
+        margin-right: 39px;
         margin-top: auto;
         margin-bottom: auto;
 
     }
 
-    .just-added {
+    .recently-added {
         grid-column: 1/7;
         grid-row: 3/3;
-        margin-left: 20px;
+        margin-left: 39px;
 
     }
 
     .favourites {
         grid-column: 7/13;
         grid-row: 3/3;
-        margin-right: 20px;
+        margin-right: 39px;
 
     }
 
