@@ -11,10 +11,10 @@
             <v-spacer></v-spacer>
         </v-toolbar>
 
-        <favourites />
         <recently-viewed />
-        <recently-added />
         <search />
+        <recently-added />
+        <favourites />
 
     </div>
 </template>
@@ -83,8 +83,6 @@ export default {
         grid-column: 1/7;
         grid-row: 2/2;
         margin-left: 39px;
-        /* border: 1px solid black; */
-
     }
 
     .search {
@@ -110,14 +108,6 @@ export default {
 
     }
 
-    .half-viewport-height {
-        height: 41vh;
-    }
-
-    .half-viewport-height.first {
-        margin-bottom: 24px;
-    }
-
     >>>.v-data-table td{
        height: 20%;
    }
@@ -137,21 +127,5 @@ export default {
     >>>.v-data-table--fixed-height .v-data-table__wrapper {
         height: 100% !important;
     }
-
-    .bottom-column {
-        margin-bottom: 12px;
-    }
-
-    /* @media screen and (min-height: 800px) {
-        >>>.v-data-table table{
-        height: 35vh;
-        }
-
-        .half-viewport-height.first {
-            margin-bottom: 50px;
-        }
-    } */
-
-
 
 </style>
