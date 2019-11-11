@@ -91,14 +91,12 @@ export default {
         margin-right: 39px;
         margin-top: auto;
         margin-bottom: auto;
-
     }
 
     .recently-added {
         grid-column: 1/7;
         grid-row: 3/3;
         margin-left: 39px;
-
     }
 
     .favourites {
