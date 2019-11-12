@@ -9,6 +9,39 @@
             </v-toolbar-items>
 
             <v-spacer></v-spacer>
+
+            <v-toolbar-items
+                v-if="$store.state.isUserLoggedIn">
+                <v-btn
+                    text>
+                    Sign Out
+                </v-btn>
+
+                <v-btn
+                    text
+                    class="font-weight-bold">
+                    {{$store.state.user.firstName}}
+                </v-btn>
+            </v-toolbar-items>
+
+            <v-toolbar-items
+                v-else>
+
+                <v-btn
+                    text
+                    :to="{
+                    name: 'login'
+                    }">
+                    Login
+                </v-btn>
+                <v-btn
+                    text
+                    :to="{
+                    name: 'register'
+                    }">
+                    Register
+                </v-btn>
+            </v-toolbar-items>
         </v-toolbar>
 
         <recently-viewed />
