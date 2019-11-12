@@ -154,6 +154,7 @@ export default {
                 console.log(error)
             }
             this.recipe.ingredients = this.convertToArray(this.recipe.ingredients).join()
+            this.recipe.ingredients = this.recipe.ingredients.replace(/\s*,\s*/g, ",")
         },
 
         convertToArray: function(string) {
