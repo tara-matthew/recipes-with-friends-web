@@ -11,42 +11,39 @@
             height="inherit"
             hide-default-header
             hide-default-footer>
-        </v-data-table>
 
+            <template slot="items" slot-scope="props">
+                <td class="text-xs-right">
+                    {{props.item.id}}
+                </td>
+
+                <td class="text-xs-right">
+                    {{props.item.id}}
+                </td>
+            </template>
+
+        </v-data-table>
     </panel>
 </template>
 
 <script>
+import RecipeService from '@/services/RecipeService'
 export default {
     data() {
         return {
             headers: [
                 {
                     text: 'Meal',
-                    value: 'name'
+                    value: 'title'
                 }
             ],
-            recentlyAdded: [
-                {
-                    name: 'Sexy ramen'
-                },
-                {
-                    name: "Caroline's butt"
-                },
-                {
-                    name: 'Roasted vegetable cous cous'
-                },
-                {
-                    name: 'Caroline'
-                },
-                {
-                    name: "Caroline's face"
-                }
-            ],
-
-            justAdded: []
+            recentlyAdded: []
         }
     },
+
+    async mounted() {
+        this.recentlyAdded = (await RecipeService.index()).data
+    }
 }
 </script>
 
