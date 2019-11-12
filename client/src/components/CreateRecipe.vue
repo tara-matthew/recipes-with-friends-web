@@ -143,12 +143,23 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
+            this.recipe.ingredients = this.convertToArray(this.recipe.ingredients)
 
             try {
                 await RecipeService.post(this.recipe)
+                this.$router.push({
+                    name: 'home'
+                })
             } catch(error) {
                 console.log(error)
             }
+        },
+
+        convertToArray: function(string) {
+            return string.split(',')
+                .map((ingredient) => {
+                    return ingredient.trim()
+                })
         }
     }
 }
