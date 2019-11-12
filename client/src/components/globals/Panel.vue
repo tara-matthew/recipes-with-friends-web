@@ -1,5 +1,5 @@
 <template>
-    <v-card :elevation="2" :class="assignedClass">
+    <v-card :elevation="2">
         <v-toolbar
             class="my-toolbar"
             :color="panelColour">
