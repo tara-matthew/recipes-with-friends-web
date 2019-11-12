@@ -18,4 +18,7 @@ module.exports = (app) => {
     app.post('/recipes',
         RecipeController.post)
 
+    app.get('/recipes',
+        RecipeController.index)
+
 }
