@@ -153,6 +153,7 @@ export default {
             } catch(error) {
                 console.log(error)
             }
+            this.recipe.ingredients = this.convertToArray(this.recipe.ingredients).join()
         },
 
         convertToArray: function(string) {
