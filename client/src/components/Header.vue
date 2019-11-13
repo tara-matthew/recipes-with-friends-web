@@ -1,10 +1,32 @@
 <template>
     <v-toolbar color="#92D1C2" class="padded-toolbar">
-        <v-toolbar-title>Recipes With Friends</v-toolbar-title>
+            <router-link
+                class="toolbar-title"
+                :to="{
+                    name: 'recipes'
+                }">
+                <v-toolbar-title>
+                    Recipes With Friends
+                </v-toolbar-title>
+            </router-link>
 
         <v-toolbar-items class="left-aligned-toolbar">
-            <v-btn text>Browse</v-btn>
+            <v-btn
+                text
+                :to="{
+                    name:'createRecipe'
+                }">
+                New Recipe
+            </v-btn>
+            <v-btn
+                text
+                :to="{
+                    name:'browse'
+                }">
+                Browse
+            </v-btn>
             <v-btn text>Random Recipe</v-btn>
+
         </v-toolbar-items>
 
         <v-spacer></v-spacer>
@@ -45,6 +67,10 @@
 </template>
 
 <style scoped>
+    .toolbar-title {
+        color: inherit;
+        text-decoration: inherit;
+    }
 
     .left-aligned-toolbar {
         margin-left: 100px;
