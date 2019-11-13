@@ -1,20 +1,6 @@
 <template>
     <div>
-        <v-toolbar color="#92D1C2" class="padded-toolbar">
-            <v-toolbar-title>Recipes With Friends</v-toolbar-title>
-
-            <v-toolbar-items class="left-aligned-toolbar">
-                <v-btn text>Browse</v-btn>
-                <v-btn text>Random Recipe</v-btn>
-            </v-toolbar-items>
-
-            <v-spacer></v-spacer>
-
-            <v-toolbar-items>
-                <v-btn text>Sign Out</v-btn>
-                <v-btn text class="font-weight-bold">Tara</v-btn>
-            </v-toolbar-items>
-        </v-toolbar>
+        <page-header />
 
         <v-container fill-height fluid>
             <v-row>
@@ -86,14 +72,22 @@
                     cols="10"
                     offset-md="1">
                     <v-card class="first-card">
-                        <v-text-field
+                        <v-col
+                            class="px-12"
+                            offset-md="2"
+                            cols="8"
+                            md="8">
+
+                        <v-textarea
+                            v-model="recipe.ingredients"
                             outlined
-                            label="What did you make?"
-                            placeholder="Sexy Ramen" />
+                            label="What are the ingredients?"
+                            placeholder="noodles">
+                        </v-textarea>
+
+                        </v-col>
                     </v-card>
                 </v-col>
-
-
 
             </v-row>
         </v-container>
@@ -106,6 +100,9 @@ import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import AuthenticationService from '@/services/AuthenticationService'
 import RecipeService from '@/services/RecipeService'
+import PageHeader from '@/components/Header'
+
+// import {mapState} from 'vuex'
 
 
 export default {
@@ -123,12 +120,20 @@ export default {
        recipe: {
            title: '',
            story: '',
+           ingredients: ''
        },
        error: null
     }),
     components: {
-        vueDropzone: vue2Dropzone
+        vueDropzone: vue2Dropzone,
+        PageHeader
     },
+    // computed: {
+    //     ...mapState([
+    //     'isUserLoggedIn',
+    //     'user'
+    // ]),
+
     methods: {
         async dropzoneChangeUrl(file) {
             await AuthenticationService.upload(file)
@@ -143,18 +148,18 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
-            this.recipe.ingredients = this.convertToArray(this.recipe.ingredients)
+            this.recipe.ingredients = this.recipe.ingredients.replace(/\s*,\s*/g, ",")
+
+            console.log(this.recipe.ingredients)
 
             try {
                 await RecipeService.post(this.recipe)
                 this.$router.push({
-                    name: 'home'
+                    name: 'recipes'
                 })
             } catch(error) {
                 console.log(error)
             }
-            this.recipe.ingredients = this.convertToArray(this.recipe.ingredients).join()
-            this.recipe.ingredients = this.recipe.ingredients.replace(/\s*,\s*/g, ",")
         },
 
         convertToArray: function(string) {
@@ -169,15 +174,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-    .left-aligned-toolbar {
-    margin-left: 100px;
-    }
-
-    .padded-toolbar {
-    padding-left:25px;
-    padding-right:25px;
-    }
 
     .page-title {
         text-align: center;

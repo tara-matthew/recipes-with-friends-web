@@ -1,49 +1,6 @@
 <template>
     <div class="wrapper">
-        <v-toolbar color="#92D1C2" class="padded-toolbar">
-            <v-toolbar-title>Recipes With Friends</v-toolbar-title>
-
-            <v-toolbar-items class="left-aligned-toolbar">
-                <v-btn text>Browse</v-btn>
-                <v-btn text>Random Recipe</v-btn>
-            </v-toolbar-items>
-
-            <v-spacer></v-spacer>
-
-            <v-toolbar-items
-                v-if="$store.state.isUserLoggedIn">
-                <v-btn
-                    text>
-                    Sign Out
-                </v-btn>
-
-                <v-btn
-                    text
-                    class="font-weight-bold">
-                    {{$store.state.user.firstName}}
-                </v-btn>
-            </v-toolbar-items>
-
-            <v-toolbar-items
-                v-else>
-
-                <v-btn
-                    text
-                    :to="{
-                    name: 'login'
-                    }">
-                    Login
-                </v-btn>
-                <v-btn
-                    text
-                    :to="{
-                    name: 'register'
-                    }">
-                    Register
-                </v-btn>
-            </v-toolbar-items>
-        </v-toolbar>
-
+        <page-header />
         <recently-viewed />
         <search />
         <recently-added />
@@ -53,6 +10,7 @@
 </template>
 
 <script>
+import PageHeader from '@/components/Header'
 import RecentlyAdded from './RecentlyAdded'
 import RecentlyViewed from './RecentlyViewed'
 import Favourites from './Favourites'
@@ -60,6 +18,7 @@ import Search from './Search'
 
 export default {
     components: {
+        PageHeader,
         RecentlyAdded,
         RecentlyViewed,
         Favourites,
@@ -70,34 +29,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-    .left-aligned-toolbar {
-        margin-left: 100px;
-    }
-
-    .padded-toolbar {
-        padding-left:25px;
-        padding-right:25px;
-        grid-column: 1/13;
-
-    }
-
-    .site-padding-left {
-        margin-left: 25px;
-    }
-
-    .site-padding-right {
-        margin-right: 25px;
-    }
-
-    .panel-title {
-        text-align: center;
-        width: 100%;
-        color: white;
-        font-family: "Segoe UI";
-        font-size: 24px;
-    }
-
     .wrapper {
         display: grid;
         height: 100vh;
