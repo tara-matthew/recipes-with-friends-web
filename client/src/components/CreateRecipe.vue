@@ -5,8 +5,8 @@
         <v-container fill-height fluid>
             <v-row>
                 <v-col
-                    cols="10"
-                    offset-md="1">
+                    cols="12"
+                    class="custom-padding pt-7">
                     <v-card class="first-card">
 
                         <v-toolbar
@@ -71,8 +71,8 @@
 
             <v-row>
                 <v-col
-                    cols="10"
-                    offset-md="1">
+                    cols="12"
+                    class="custom-padding">
                     <v-card class="first-card">
                         <v-row>
                             <v-col
@@ -101,8 +101,8 @@
 
             <v-row>
                 <v-col
-                    cols="10"
-                    offset-md="1">
+                    cols="12"
+                    class="custom-padding">
                     <v-card class="first-card">
                         <v-row>
                             <v-col
@@ -217,6 +217,11 @@ export default {
         color: white;
         font-family: "Segoe UI";
         font-size: 24px;
+    }
+
+    .custom-padding {
+        padding-left: 39px;
+        padding-right: 39px;
     }
 
     >>>.v-input__slot .v-label {
