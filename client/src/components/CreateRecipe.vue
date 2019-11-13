@@ -148,7 +148,7 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
-            this.recipe.ingredients = this.recipe.ingredients.replace(/\s*,\s*/g, ",")
+            this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
 
             console.log(this.recipe.ingredients)
 
