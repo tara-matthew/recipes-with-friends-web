@@ -67,28 +67,57 @@
                         </v-row>
                     </v-card>
                 </v-col>
+            </v-row>
 
+            <v-row>
                 <v-col
                     cols="10"
                     offset-md="1">
                     <v-card class="first-card">
-                        <v-col
-                            class="px-12"
-                            offset-md="2"
-                            cols="8"
-                            md="8">
+                        <v-row>
+                            <v-col
+                                class="px-12 pt-12"
+                                cols="6"
+                                md="6">
+                                <v-textarea
+                                    v-model="recipe.ingredients"
+                                    outlined
+                                    label="What are the ingredients?"
+                                    placeholder="noodles, ham,chicken,    eggs">
+                                </v-textarea>
+                            </v-col>
 
-                        <v-textarea
-                            v-model="recipe.ingredients"
-                            outlined
-                            label="What are the ingredients?"
-                            placeholder="noodles">
-                        </v-textarea>
-
-                        </v-col>
+                            <v-col
+                                class="px-12 pt-12"
+                                cols="5"
+                                md="5">
+                                <p class="bold-instruction">Separate your ingredients with commas, but don't worry about how many spaces you use.</p>
+                                <p class=italic-instruction>A list of your most-used ingredients will appear here when you've added some recipes!</p>
+                            </v-col>
+                        </v-row>
                     </v-card>
                 </v-col>
+            </v-row>
 
+            <v-row>
+                <v-col
+                    cols="10"
+                    offset-md="1">
+                    <v-card class="first-card">
+                        <v-row>
+                            <v-col
+                                class="px-12 pt-12"
+                                cols="6"
+                                md="6">
+                                <v-textarea
+                                    outlined
+                                    label="How do you make it?"
+                                    placeholder="blahblah">
+                                </v-textarea>
+                            </v-col>
+                        </v-row>
+                    </v-card>
+                </v-col>
             </v-row>
         </v-container>
 
@@ -236,6 +265,16 @@ export default {
         top: 50%;
         transform: translate(-50%,-50%);
         left: 50%;
+    }
+
+    .bold-instruction {
+        font-weight: bold;
+        color: #099E7A;
+    }
+
+    .italic-instruction {
+        font-style: italic;
+        color: #036F55;
     }
 
     /* .story >>>.v-input__slot .v-label{
