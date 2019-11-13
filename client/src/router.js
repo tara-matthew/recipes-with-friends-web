@@ -8,6 +8,8 @@ import GridView from '@/components/GridView'
 import ViewRecipe from '@/components/ViewRecipe'
 import CreateRecipe from '@/components/CreateRecipe'
 import Recipes from '@/components/Recipes/Index'
+import Browse from '@/components/Browse'
+
 
 Vue.use(Router)
 
@@ -52,6 +54,11 @@ export default new Router({
             path: '/recipes',
             name: 'recipes',
             component: Recipes
+        },
+        {
+            path: '/browse',
+            name: 'browse',
+            component: Browse
         }
     ]
 })
