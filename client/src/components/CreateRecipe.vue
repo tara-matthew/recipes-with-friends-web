@@ -134,10 +134,6 @@ export default {
         margin-bottom: 63px;
     }
 
-    .story>>>.v-input__slot {
-        margin-bottom: 21px;
-    }
-
     .first-card {
         background: #F7F7F7;
         margin-bottom: 20px;
@@ -161,6 +157,4 @@ export default {
         padding-left: 39px;
         padding-right: 39px;
     }
-
-
 </style>

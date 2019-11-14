@@ -126,43 +126,48 @@
 </script>
 
 <style scoped>
-.panel-title {
-    text-align: center;
-    width: 100%;
-    color: white;
-    font-family: "Segoe UI";
-    font-size: 24px;
-}
+    .panel-title {
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-family: "Segoe UI";
+        font-size: 24px;
+    }
 
-.custom-padding {
-    padding-left: 39px;
-    padding-right: 39px;
-}
+    .custom-padding {
+        padding-left: 39px;
+        padding-right: 39px;
+    }
 
-.first-card {
-    /* padding-left: 45px;
-    padding-right: 45px;
-    padding-top: 25px; */
-    background: #F7F7F7;
-    margin-bottom: 20px;
-}
+    .first-card {
+        /* padding-left: 45px;
+        padding-right: 45px;
+        padding-top: 25px; */
+        background: #F7F7F7;
+        margin-bottom: 20px;
+    }
 
-.green-colour {
-    color: #099E7A;
-}
+    .green-colour {
+        color: #099E7A;
+    }
 
-.dropzone {
-    min-height: 276px;
-    max-height: 276px;
-    overflow: auto;
-    background: #F7F7F7;
-    position: relative;
-}
+    .dropzone {
+        min-height: 276px;
+        max-height: 276px;
+        overflow: auto;
+        background: #F7F7F7;
+        position: relative;
+    }
 
-.dropzone-text-container {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    left: 50%;
-}
+    .dropzone-text-container {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        left: 50%;
+    }
+
+
+    .story>>>.v-input__slot {
+        margin-bottom: 21px;
+    }
 </style>
