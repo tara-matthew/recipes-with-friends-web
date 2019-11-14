@@ -15,6 +15,8 @@
                             :key = "input.id">
                             <v-textarea
                                 outlined
+                                rows="6"
+                                auto-grow
                                 :label ="input.label"
                                 placeholder="Massage oil into Caroline">
                             </v-textarea>
@@ -29,9 +31,20 @@
                         </v-card-actions>
                     </v-col>
                     <v-col
-                        class="px-12 pt-12"
-                        cols="6"
-                        md="6">
+                        class="center-aligned px-12 pt-12"
+                        md="6"
+                        cols="6">
+                        <vue-dropzone
+                            ref="vueDropzone"
+                            id="drop1"
+                            :options="dropOptions"
+                            :useCustomSlot=true
+                            @vdropzone-file-added="dropzoneChangeUrl">
+                            <div class="dropzone-text-container">
+                                <h3 class="green-colour">Send your favourite noodz here</h3>
+                                <div>...or click to upload from your computer</div>
+                            </div>
+                        </vue-dropzone>
                     </v-col>
                 </v-row>
             </v-card>
@@ -40,8 +53,23 @@
 </template>
 
 <script>
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
     data: () => ({
+        dropOptions: {
+            method: "POST",
+            url: "http://localhost:8081/upload",
+            thumbnailWidth: 90, // px
+            thumbnailHeight: 90,
+            header: {
+               'Access-Control-Allow-Origin': '*',
+               'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+               'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-File-Name, X-File-Size, X-File-Type',
+               'Content-Type': 'application/x-www-form-urlencoded'
+           },
+       },
         counter: 1,
         inputs: [{
             id: 'method1',
@@ -58,7 +86,10 @@ export default {
                 value: ''
             })
         },
-    }
+    },
+    components: {
+        vueDropzone: vue2Dropzone
+    },
 }
 </script>
 
@@ -72,4 +103,14 @@ export default {
         background: #F7F7F7;
         margin-bottom: 20px;
     }
+
+    .dropzone {
+        min-height: 160px;
+        max-height: 160px;
+        overflow: auto;
+        background: #F7F7F7;
+        position: relative;
+    }
+
+
 </style>
