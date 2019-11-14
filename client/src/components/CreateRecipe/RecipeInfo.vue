@@ -92,9 +92,11 @@
             },
             error: null
         }),
+
         components: {
             vueDropzone: vue2Dropzone
         },
+
         methods: {
             async dropzoneChangeUrl(file) {
                 await AuthenticationService.upload(file)
@@ -140,9 +142,6 @@
     }
 
     .first-card {
-        /* padding-left: 45px;
-        padding-right: 45px;
-        padding-top: 25px; */
         background: #F7F7F7;
         margin-bottom: 20px;
     }
