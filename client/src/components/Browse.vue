@@ -5,8 +5,8 @@
         <v-container fill-height fluid>
             <v-row>
                 <v-col
-                    cols="10"
-                    offset-md="1">
+                    cols="12"
+                    class="custom-padding pt-7">
                     <panel
                         title="Browse"
                         class="browse"
@@ -63,7 +63,6 @@ export default {
 
     async mounted() {
         this.recipes = (await RecipeService.index()).data
-        console.log(this.recipes)
     }
 }
 </script>
@@ -89,5 +88,10 @@ export default {
         text-align: center;
         font-weight: bold;
         font-family: "Segoe UI";
+    }
+
+    .custom-padding {
+        padding-left: 39px;
+        padding-right: 39px;
     }
 </style>
