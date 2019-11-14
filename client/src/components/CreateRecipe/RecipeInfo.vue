@@ -112,8 +112,6 @@
                 }
                 this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
 
-                console.log(this.recipe.ingredients)
-
                 try {
                     await RecipeService.post(this.recipe)
                     this.$router.push({
@@ -164,8 +162,7 @@
         transform: translate(-50%,-50%);
         left: 50%;
     }
-
-
+    
     .story>>>.v-input__slot {
         margin-bottom: 21px;
     }
