@@ -109,11 +109,29 @@
                                 class="px-12 pt-12"
                                 cols="6"
                                 md="6">
-                                <v-textarea
-                                    outlined
-                                    label="How do you make it?"
-                                    placeholder="blahblah">
-                                </v-textarea>
+                                <div
+                                    class="input-area"
+                                    v-for="input in inputs"
+                                    :key = "input.id">
+                                    <v-textarea
+                                        outlined
+                                        :label ="input.label"
+                                        placeholder="Massage oil into Caroline">
+                                    </v-textarea>
+                                </div>
+                                <v-card-actions class="justify-center">
+                                    <v-btn
+                                        color="#099E7A"
+                                        class="mb-3 white--text"
+                                        @click="addInput">
+                                        Add
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-col>
+                            <v-col
+                                class="px-12 pt-12"
+                                cols="6"
+                                md="6">
                             </v-col>
                         </v-row>
                     </v-card>
@@ -136,6 +154,13 @@ import PageHeader from '@/components/Header'
 
 export default {
     data: () => ({
+        counter: 1,
+        inputs: [{
+            id: 'method1',
+            label: 'How do you make it?',
+            value: '',
+        }],
+
         dropOptions: {
             method: "POST",
             url: "http://localhost:8081/upload",
@@ -189,6 +214,14 @@ export default {
             } catch(error) {
                 console.log(error)
             }
+        },
+
+        addInput() {
+            this.inputs.push({
+                id: `method${++this.counter}`,
+                label: `Step ${this.counter}`,
+                value: ''
+            })
         },
 
         convertToArray: function(string) {
