@@ -6,6 +6,7 @@
 
         <v-data-table
             class="custom-data-table"
+            items-per-page="5"
             :headers="headers"
             :items="recentlyAdded"
             height="inherit"
