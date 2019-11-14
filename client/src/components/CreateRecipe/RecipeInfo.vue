@@ -20,7 +20,8 @@
                             outlined
                             label="What did you make?"
                             placeholder="Sexy Ramen"
-                            v-model="recipe.title" />
+                            v-model="recipe.title"
+                            v-on:change="emitChange()" />
 
                         <v-textarea
                             auto-grow
@@ -34,14 +35,7 @@
                             {{error}}
                         </div>
 
-                        <v-card-actions class="justify-center">
-                            <v-btn
-                                color="#099E7A"
-                                class="mb-3 white--text"
-                                @click="saveRecipe">
-                                Save
-                            </v-btn>
-                        </v-card-actions>
+
                     </v-col>
 
                     <v-col
@@ -71,7 +65,7 @@
     import AuthenticationService from '@/services/AuthenticationService'
     import vue2Dropzone from 'vue2-dropzone'
     import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-    import RecipeService from '@/services/RecipeService'
+    import {EventBus} from '@/events/EventBus.js'
 
     export default {
         data: () => ({
@@ -88,7 +82,8 @@
             recipe: {
                 title: '',
                 story: '',
-                ingredients: ''
+                ingredients: '',
+                method: ''
             },
             error: null
         }),
@@ -101,26 +96,10 @@
             async dropzoneChangeUrl(file) {
                 await AuthenticationService.upload(file)
             },
-            async saveRecipe() {
-                this.error = null
-                const hasTitle = (Object
-                    .values(this.recipe)[0].length) > 0
 
-                if (!hasTitle) {
-                    this.error = 'Your recipe needs a title'
-                    return
-                }
-                this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
-
-                try {
-                    await RecipeService.post(this.recipe)
-                    this.$router.push({
-                        name: 'recipes'
-                    })
-                } catch(error) {
-                    console.log(error)
-                }
-            },
+            emitChange() {
+                EventBus.$emit('sendRecipe', this.recipe)
+            }
         }
     }
 </script>
@@ -162,7 +141,7 @@
         transform: translate(-50%,-50%);
         left: 50%;
     }
-    
+
     .story>>>.v-input__slot {
         margin-bottom: 21px;
     }

@@ -15,6 +15,15 @@
                             label="What are the ingredients?"
                             placeholder="noodles, ham,chicken,    eggs">
                         </v-textarea>
+
+                        <v-card-actions class="justify-center">
+                            <v-btn
+                                color="#099E7A"
+                                class="mb-3 white--text"
+                                @click="saveRecipe">
+                                Save
+                            </v-btn>
+                        </v-card-actions>
                     </v-col>
 
                     <v-col
@@ -31,17 +40,47 @@
 </template>
 
 <script>
+import RecipeService from '@/services/RecipeService'
+import {EventBus} from '@/events/EventBus.js'
+
 export default {
     data: () => ({
         recipe: {
             title: '',
             story: '',
-            ingredients: ''
+            ingredients: '',
+            method: ''
         },
         error: null
     }),
 
+    mounted() {
+        EventBus.$on('sendRecipe', recipe => {
+            this.recipe = recipe
+        })
+    },
     methods: {
+        async saveRecipe() {
+            this.error = null
+            const hasTitle = (Object
+                .values(this.recipe)[0].length) > 0
+
+            if (!hasTitle) {
+                this.error = 'Your recipe needs a title'
+                return
+            }
+            this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
+
+            try {
+                console.log(this.recipe)
+                await RecipeService.post(this.recipe)
+                this.$router.push({
+                    name: 'recipes'
+                })
+            } catch(error) {
+                console.log(error)
+            }
+        },
     }
 }
 </script>
