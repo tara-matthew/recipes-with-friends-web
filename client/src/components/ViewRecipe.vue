@@ -26,10 +26,8 @@
                             <v-col
                                 cols="7"
                                 class="px-12 py-12">
-
                                 <div class="info-box">
                                     <h2>Chicken ramen</h2>
-
                                     <div class="details">
                                         <v-row>
                                             <v-col
@@ -37,7 +35,6 @@
                                                 class="pb-0">
                                                 <p class="bold-text">Prep:</p>
                                                 <p class="bold-text">Cook:</p>
-
                                             </v-col>
 
                                             <v-col
@@ -48,7 +45,48 @@
                                         </v-row>
                                     </div>
                                 </div>
+                            </v-col>
+                        </v-row>
+                    </panel>
+                </v-col>
+            </v-row>
 
+            <v-row>
+                <v-col
+                    cols="6"
+                    class="custom-padding pt-7"
+                    align-self="center">
+                    <panel
+                        title="Story"
+                        panelColour="#099E7A"
+                        class="story-panel">
+                        <v-row>
+                            <v-col
+                                cols="12"
+                                class="px-12 py-12">
+
+                                <div>
+                                    <p>It was great.</p>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </panel>
+                </v-col>
+                <v-col
+                    cols="6"
+                    class="custom-padding pt-7"
+                    align-self="center">
+                    <panel
+                        title="Hot Tips"
+                        panelColour="#099E7A"
+                        class="tips-panel">
+                        <v-row>
+                            <v-col
+                                cols="12"
+                                class="px-12 py-12">
+                                <div>
+                                    <p>Don't burn the onions!</p>
+                                </div>
                             </v-col>
                         </v-row>
                     </panel>
@@ -62,12 +100,10 @@
                     <panel
                         title="Ingredients"
                         panelColour="#08AC84">
-
                         <v-row>
                             <v-col
                                 cols="12"
                                 class="px-12 py-12">
-
                                 <div class="inner-container">
                                     <p>Test</p>
                                     <p>Test</p>
@@ -81,52 +117,26 @@
                                     <p>Test</p>
                                     <p>Test</p>
                                     <p>Test</p>
+                                    <p>Test</p>
                                 </div>
                             </v-col>
                         </v-row>
                     </panel>
                 </v-col>
-
                 <v-col
                     cols="8"
                     class="custom-padding pt-7"
                     align-self="center">
                     <panel
-                        title="Story"
-                        panelColour="#099E7A">
-
-                        <v-row>
-                            <v-col
-                                cols="12"
-                                class="px-12 py-12">
-
-                                <div>
-                                    <p>It was great.</p>
-                                </div>
-                            </v-col>
-                        </v-row>
-                    </panel>
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col
-                    cols="12"
-                    class="custom-padding pt-7">
-
-                    <panel
                         title="Method"
-                        panelColour="#036F55">
-
+                        panelColour="#036F55"
+                        class="method-panel">
                         <v-row>
                             <v-col
                                 cols="6"
                                 class="custom-padding px-12 py-12">
-
                                 <p>Step 1</p>
-
                             </v-col>
-
                             <v-col
                                 cols="6"
                                 class="custom-padding px-12 py-12">
@@ -136,15 +146,25 @@
                             </v-col>
                         </v-row>
 
+                        <v-row>
+                            <v-col
+                                cols="6"
+                                class="custom-padding px-12 py-12">
+                                <p>Step 1</p>
+                            </v-col>
+                            <v-col
+                                cols="6"
+                                class="custom-padding px-12 py-12">
+                                <div class="photo-box">
+                                    <p class="photo-text">Photo here</p>
+                                </div>
+                            </v-col>
+                        </v-row>
                     </panel>
-
                 </v-col>
-
             </v-row>
-
         </v-container>
     </div>
-
 
 </template>
 
@@ -189,13 +209,13 @@ export default {
     }
 
     .info-box {
-        border: 1px solid black;
+        /* border: 1px solid black; */
         height: 259px;
         position: relative;
     }
 
     .details {
-        border: 1px solid black;
+        /* border: 1px solid black; */
         margin-top: 20px;
         position: absolute;
         bottom: 0;
@@ -216,6 +236,21 @@ export default {
 
     .inner-container {
         min-height: 300px;
+        max-height: 533px;
+        overflow: auto;
+    }
+
+    .method-panel {
+        min-height: 426px;
+        max-height: 426px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .story-panel, .tips-panel {
+        min-height: 297px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
 </style>
