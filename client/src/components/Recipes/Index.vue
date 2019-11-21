@@ -84,6 +84,9 @@ export default {
 
     >>>.theme--light.v-data-table {
         height: calc(100% - 64px);
+        font-family: Segoe UI;
+        font-weight: 600;
+        background: #F7F7F7;
     }
 
     >>>.v-data-table--fixed-height .v-data-table__wrapper {
