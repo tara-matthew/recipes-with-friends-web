@@ -18,6 +18,7 @@
                                 rows="6"
                                 auto-grow
                                 :label ="input.label"
+                                v-model="recipe.method"
                                 placeholder="Massage oil into Caroline">
                             </v-textarea>
                         </div>
@@ -31,20 +32,25 @@
                         </v-card-actions>
                     </v-col>
                     <v-col
-                        class="center-aligned px-12 pt-12"
+                        class="center-aligned px-12"
                         md="6"
                         cols="6">
-                        <vue-dropzone
-                            ref="vueDropzone"
-                            id="drop1"
-                            :options="dropOptions"
-                            :useCustomSlot=true
-                            @vdropzone-file-added="dropzoneChangeUrl">
-                            <div class="dropzone-text-container">
-                                <h3 class="green-colour">Send your favourite noodz here</h3>
-                                <div>...or click to upload from your computer</div>
-                            </div>
-                        </vue-dropzone>
+                        <div
+                            class="input-area"
+                            v-for="input in inputs"
+                            :key = "input.id">
+                            <vue-dropzone
+                                ref="vueDropzone"
+                                id="drop1"
+                                :options="dropOptions"
+                                :useCustomSlot=true
+                                @vdropzone-file-added="dropzoneChangeUrl">
+                                <div class="dropzone-text-container">
+                                    <h3 class="green-colour">Send your favourite noodz here</h3>
+                                    <div>...or click to upload from your computer</div>
+                                </div>
+                            </vue-dropzone>
+                        </div>
                     </v-col>
                 </v-row>
             </v-card>
@@ -70,6 +76,12 @@ export default {
                'Content-Type': 'application/x-www-form-urlencoded'
            },
        },
+       recipe: {
+           title: '',
+           story: '',
+           ingredients: '',
+           method: ''
+       },
         counter: 1,
         inputs: [{
             id: 'method1',
@@ -77,6 +89,7 @@ export default {
             value: '',
         }],
     }),
+
 
     methods: {
         addInput() {
@@ -110,6 +123,8 @@ export default {
         overflow: auto;
         background: #F7F7F7;
         position: relative;
+        margin-top: 35px;
+        margin-bottom: 81px;
     }
 
 
