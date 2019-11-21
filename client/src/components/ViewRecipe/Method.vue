@@ -1,12 +1,12 @@
 <template>
     <v-col
         cols="8"
-        class="custom-padding pt-7"
-        align-self="center">
+        class="custom-padding pt-7">
         <panel
             title="Method"
             panelColour="#036F55"
-            class="method-panel">
+            class="method-panel"
+            id="method-panel">
             <v-row>
                 <v-col
                     cols="6"
@@ -41,6 +41,16 @@
 
 </template>
 
+<script>
+export default {
+    mounted() {
+        const ingredientsPanelHeight = document.getElementById('ingredients-panel').offsetHeight;
+        const methodPanel = document.getElementById('method-panel')
+        methodPanel.style.height = ingredientsPanelHeight + 'px'
+    }
+}
+</script>
+
 <style scoped>
 .custom-padding {
     padding-left: 39px;
@@ -48,8 +58,6 @@
 }
 
 .method-panel {
-    min-height: 426px;
-    max-height: 426px;
     overflow-y: auto;
     overflow-x: hidden;
 }

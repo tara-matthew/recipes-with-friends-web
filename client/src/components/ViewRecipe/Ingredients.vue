@@ -4,7 +4,8 @@
         class="custom-padding pt-7">
         <panel
             title="Ingredients"
-            panelColour="#08AC84">
+            panelColour="#08AC84"
+            id="ingredients-panel">
             <v-row>
                 <v-col
                     cols="12"
