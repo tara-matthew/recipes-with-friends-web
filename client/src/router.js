@@ -4,11 +4,10 @@ import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
-import GridView from '@/components/GridView'
-import ViewRecipe from '@/components/ViewRecipe'
 import CreateRecipe from '@/components/CreateRecipe'
 import Recipes from '@/components/Recipes/Index'
 import Browse from '@/components/Browse'
+import ViewRecipe from '@/components/ViewRecipe/Index'
 
 
 Vue.use(Router)
@@ -36,11 +35,6 @@ export default new Router({
             component: Home
         },
         {
-            path: '/grid',
-            name: 'gridView',
-            component: GridView
-        },
-        {
             path: '/viewrecipe',
             name: 'viewRecipe',
             component: ViewRecipe
@@ -59,6 +53,6 @@ export default new Router({
             path: '/browse',
             name: 'browse',
             component: Browse
-        }
+        },
     ]
 })
