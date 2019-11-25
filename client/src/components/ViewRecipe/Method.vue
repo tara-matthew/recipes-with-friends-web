@@ -42,11 +42,17 @@
 </template>
 
 <script>
+import {EventBus} from '@/events/EventBus.js'
+
 export default {
+    props: [
+        'recipe'
+    ],
     mounted() {
-        const ingredientsPanelHeight = document.getElementById('ingredients-panel').offsetHeight;
         const methodPanel = document.getElementById('method-panel')
-        methodPanel.style.height = ingredientsPanelHeight + 'px'
+        EventBus.$on('height', val => {
+            methodPanel.style.height = val + 'px'
+        })
     }
 }
 </script>

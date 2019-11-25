@@ -5,25 +5,16 @@
         <panel
             title="Ingredients"
             panelColour="#08AC84"
-            id="ingredients-panel">
+            id="ingredients-panel"
+            ref="ingredientsPanel">
             <v-row>
                 <v-col
                     cols="12"
                     class="px-12 py-12">
                     <div class="inner-container">
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
-                        <p>Test</p>
+
+                        <p v-for="ingredient in recipe.ingredients" v-bind:key="ingredient">{{ingredient}}</p>
+
                     </div>
                 </v-col>
             </v-row>
@@ -31,6 +22,24 @@
     </v-col>
 
 </template>
+
+<script>
+import {EventBus} from '@/events/EventBus.js'
+
+export default {
+
+    props: [
+        'recipe'
+    ],
+
+    updated() {
+    this.$nextTick(function() {
+        EventBus.$emit('height', document.getElementById('ingredients-panel').offsetHeight)
+    })
+}
+}
+
+</script>
 
 <style scoped>
 .custom-padding {
