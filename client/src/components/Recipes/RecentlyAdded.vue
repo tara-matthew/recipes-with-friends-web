@@ -13,16 +13,15 @@
             hide-default-header
             hide-default-footer>
 
-            <template slot="items" slot-scope="props">
-                <td class="text-xs-right">
-                    {{props.item.id}}
-                </td>
-
-                <td class="text-xs-right">
-                    {{props.item.id}}
-                </td>
+            <template v-slot:item="props">
+                <tr @click="goToRoute">
+                    <td
+                        :id="props.item.id"
+                        class="text-start">
+                        {{props.item.title}}
+                    </td>
+                </tr>
             </template>
-
         </v-data-table>
     </panel>
 </template>
