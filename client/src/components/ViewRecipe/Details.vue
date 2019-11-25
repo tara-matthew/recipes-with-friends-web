@@ -23,7 +23,7 @@
                         cols="7"
                         class="px-12 py-12">
                         <div class="info-box">
-                            <h2>Chicken ramen</h2>
+                            <h2>{{recipe.title}}</h2>
                             <div class="details">
                                 <v-row>
                                     <v-col
@@ -48,6 +48,18 @@
     </v-row>
 
 </template>
+
+<script>
+export default {
+    props: [
+        'recipe'
+    ],
+
+    mounted() {
+        console.log(this.recipe)
+    }
+}
+</script>
 
 <style scoped>
 .custom-padding {

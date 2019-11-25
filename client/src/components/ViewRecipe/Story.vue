@@ -13,13 +13,21 @@
                     class="px-12 py-12">
 
                     <div>
-                        <p>It was great.</p>
+                        <p>{{recipe.story}}</p>
                     </div>
                 </v-col>
             </v-row>
         </panel>
     </v-col>
 </template>
+
+<script>
+export default {
+    props: [
+        'recipe'
+    ]
+}
+</script>
 
 <style scoped>
 .custom-padding {

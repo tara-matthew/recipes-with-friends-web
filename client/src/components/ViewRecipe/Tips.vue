@@ -20,6 +20,14 @@
     </v-col>
 </template>
 
+<script>
+export default {
+    props: [
+        'recipe'
+    ]
+}
+</script>
+
 <style scoped>
 .custom-padding {
     padding-left: 39px;
