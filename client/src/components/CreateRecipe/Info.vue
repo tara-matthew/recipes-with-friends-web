@@ -98,6 +98,7 @@
             },
 
             emitChange() {
+                console.log('changed')
                 EventBus.$emit('sendRecipe', this.recipe)
             }
         }

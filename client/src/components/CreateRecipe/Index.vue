@@ -12,9 +12,9 @@
 
 <script>
 import PageHeader from '@/components/Header'
-import RecipeInfo from '@/components/CreateRecipe/RecipeInfo'
-import RecipeIngredients from '@/components/CreateRecipe/RecipeIngredients'
-import RecipeMethod from '@/components/CreateRecipe/RecipeMethod'
+import RecipeInfo from '@/components/CreateRecipe/Info'
+import RecipeIngredients from '@/components/CreateRecipe/Ingredients'
+import RecipeMethod from '@/components/CreateRecipe/Method'
 
 export default {
     components: {
