@@ -2,14 +2,14 @@
     <div>
         <page-header />
         <v-container fill-height fluid>
-            <recipe-details />
+            <recipe-details :recipe="recipe" />
             <v-row>
-                <recipe-story />
-                <recipe-tips />
+                <recipe-story :recipe="recipe" />
+                <recipe-tips :recipe="recipe" />
             </v-row>
             <v-row>
-                <recipe-ingredients />
-                <recipe-method />
+                <recipe-ingredients v-if="recipe" :recipe="recipe"></recipe-ingredients>
+                <recipe-method :recipe="recipe" />
             </v-row>
         </v-container>
     </div>
@@ -32,6 +32,20 @@ export default {
             recipe: {}
         }
     },
+    async mounted() {
+        const recipeId = this.$store.state.route.params.recipeId
+        this.recipe = (await RecipeService.show(recipeId)).data
+
+        // Convert the ingredients to an array
+        this.recipe.ingredients = this.convertToArray(this.recipe.ingredients)
+    },
+
+    methods: {
+        convertToArray(string) {
+            return string.split(', ')
+        }
+    },
+
     components: {
         PageHeader,
         RecipeDetails,
@@ -41,10 +55,7 @@ export default {
         RecipeMethod
     },
 
-    async mounted() {
-        const recipeId = this.$store.state.route.params.recipeId
-        this.recipe = (await RecipeService.show(recipeId)).data
-    }
+
 }
 
 </script>
