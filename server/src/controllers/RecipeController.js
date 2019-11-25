@@ -21,5 +21,17 @@ module.exports = {
                 error: "Couldn't get recipes"
             })
         }
+    },
+
+    async show(req,res) {
+        try {
+            const recipeId = req.params.recipeId
+            const recipe = await Recipe.findByPk(recipeId)
+            res.send(recipe)
+        } catch(error) {
+            res.status(500).send({
+                error: 'Could not retrieve recipe'
+            })
+        }
     }
 }

@@ -1,11 +1,15 @@
 import Api from '../services/Api'
 
 export default {
-    post (recipe) {
+    post(recipe) {
         return Api().post('recipes', recipe)
     },
 
-    index (params) {
+    show(recipeId) {
+        return Api().get(`recipes/${recipeId}`)
+    },
+
+    index(params) {
         return Api().get('recipes', {
             params: params
         })

@@ -23,9 +23,15 @@ import RecipeStory from './Story'
 import RecipeTips from './Tips'
 import RecipeIngredients from './Ingredients'
 import RecipeMethod from './Method'
+import RecipeService from '@/services/RecipeService'
 
 
 export default {
+    data() {
+        return {
+            recipe: {}
+        }
+    },
     components: {
         PageHeader,
         RecipeDetails,
@@ -33,6 +39,11 @@ export default {
         RecipeTips,
         RecipeIngredients,
         RecipeMethod
+    },
+
+    async mounted() {
+        const recipeId = this.$store.state.route.params.recipeId
+        this.recipe = (await RecipeService.show(recipeId)).data
     }
 }
 

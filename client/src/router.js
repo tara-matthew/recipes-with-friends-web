@@ -35,7 +35,7 @@ export default new Router({
             component: Home
         },
         {
-            path: '/viewrecipe',
+            path: '/viewrecipe/:recipeId',
             name: 'viewRecipe',
             component: ViewRecipe
         },

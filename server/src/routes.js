@@ -21,4 +21,7 @@ module.exports = (app) => {
     app.get('/recipes',
         RecipeController.index)
 
+    app.get('/recipes/:recipeId',
+        RecipeController.show)
+
 }
