@@ -6,7 +6,7 @@
 
         <v-text-field
             class="px-8"
-            label="Search by title, ingredient, cuisine, mood, or Caroline"
+            label="Search by title, ingredient, cuisine, or mood"
             v-model="search">
         </v-text-field>
 

@@ -29,19 +29,19 @@
                 ],
                 recentlyViewed: [
                     {
-                        name: 'Sexy ramen'
+                        name: 'Chicken ramen'
                     },
                     {
-                        name: "Caroline's butt"
+                        name: "Tarka dall"
                     },
                     {
                         name: 'Roasted vegetable cous cous'
                     },
                     {
-                        name: 'Caroline'
+                        name: 'Aubergine parmigiana'
                     },
                     {
-                        name: "Caroline's face"
+                        name: "Lamb koftas"
                     }
                 ],
 

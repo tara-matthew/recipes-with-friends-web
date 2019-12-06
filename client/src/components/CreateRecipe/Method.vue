@@ -19,7 +19,7 @@
                                 auto-grow
                                 :label ="input.label"
                                 v-model="recipe.method"
-                                placeholder="Massage oil into Caroline">
+                                placeholder="Crush garlic">
                             </v-textarea>
                         </div>
                         <v-card-actions class="justify-center">
@@ -46,7 +46,7 @@
                                 :useCustomSlot=true
                                 @vdropzone-file-added="dropzoneChangeUrl">
                                 <div class="dropzone-text-container">
-                                    <h3 class="green-colour">Send your favourite noodz here</h3>
+                                    <h3 class="green-colour">Drop photos of this step here</h3>
                                     <div>...or click to upload from your computer</div>
                                 </div>
                             </vue-dropzone>
