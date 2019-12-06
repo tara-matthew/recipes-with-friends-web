@@ -19,14 +19,14 @@
                         <v-text-field
                             outlined
                             label="What did you make?"
-                            placeholder="Sexy Ramen"
+                            placeholder="Chicken Ramen"
                             v-model="recipe.title"
                             v-on:change="emitChange()" />
 
                         <v-textarea
                             auto-grow
                             class="story"
-                            placeholder="It was very sexy"
+                            placeholder="An old recipe from my mother"
                             label="What's the story?"
                             outlined
                             v-model="recipe.story" />
@@ -49,7 +49,7 @@
                             :useCustomSlot=true
                             @vdropzone-file-added="dropzoneChangeUrl">
                             <div class="dropzone-text-container">
-                                <h3 class="green-colour">Send your favourite noodz here</h3>
+                                <h3 class="green-colour">Drop some photos here</h3>
                                 <div>...or click to upload from your computer</div>
                             </div>
                         </vue-dropzone>
