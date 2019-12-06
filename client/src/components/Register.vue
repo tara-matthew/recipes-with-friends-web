@@ -76,7 +76,7 @@
                     this.$store.dispatch('setUser', response.data.user)
                     console.log(response.data)
                     this.$router.push({
-                        name: 'home'
+                        name: 'recipes'
                     })
                 } catch(error) {
                     console.log(error)
