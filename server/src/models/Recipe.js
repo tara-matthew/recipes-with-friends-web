@@ -3,8 +3,6 @@ module.exports = (sequelize, DataTypes) => {
         title: DataTypes.STRING,
         story: DataTypes.TEXT,
         ingredients: DataTypes.TEXT
-
-
     })
 
     return Recipe
