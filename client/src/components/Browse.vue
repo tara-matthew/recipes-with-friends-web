@@ -62,6 +62,8 @@ export default {
     },
 
     async mounted() {
+
+        //Retrieves all recipes which have been added
         this.recipes = (await RecipeService.index()).data
     }
 }
