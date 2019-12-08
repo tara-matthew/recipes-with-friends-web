@@ -97,6 +97,7 @@
                 await AuthenticationService.upload(file)
             },
 
+            // Allows recipe to be shared with sibling components
             emitChange() {
                 console.log('changed')
                 EventBus.$emit('sendRecipe', this.recipe)

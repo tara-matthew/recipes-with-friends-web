@@ -33,10 +33,12 @@ export default {
     ],
 
     updated() {
-    this.$nextTick(function() {
-        EventBus.$emit('height', document.getElementById('ingredients-panel').offsetHeight)
-    })
-}
+
+        // Ensure that the ingredients panel and methods panel are the same height
+        this.$nextTick(function() {
+            EventBus.$emit('height', document.getElementById('ingredients-panel').offsetHeight)
+        })
+    }
 }
 
 </script>

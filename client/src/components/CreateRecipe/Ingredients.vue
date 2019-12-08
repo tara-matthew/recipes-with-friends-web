@@ -55,6 +55,7 @@ export default {
     }),
 
     mounted() {
+        //Set recipe to the value which has bveen received from Info.vue
         EventBus.$on('sendRecipe', recipe => {
             this.recipe = recipe
         })
@@ -62,6 +63,8 @@ export default {
     methods: {
         async saveRecipe() {
             this.error = null
+
+            // Check that a title has been entered
             const hasTitle = (Object
                 .values(this.recipe)[0].length) > 0
 
@@ -69,6 +72,9 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
+
+
+            // Regex to remove whitespace
             this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
 
             try {
