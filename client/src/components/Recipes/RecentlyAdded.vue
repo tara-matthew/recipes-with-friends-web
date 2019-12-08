@@ -43,6 +43,17 @@ export default {
 
     async mounted() {
         this.recentlyAdded = (await RecipeService.index()).data
+    },
+    methods: {
+        goToRoute() {
+            const recipeId = event.target.id
+            this.$router.push({
+                name:'viewRecipe',
+                params: {
+                    recipeId: recipeId
+                }
+            })
+        }
     }
 }
 </script>
