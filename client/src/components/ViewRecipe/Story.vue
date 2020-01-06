@@ -12,7 +12,7 @@
                     cols="12"
                     class="px-12 py-12">
 
-                    <div>
+                    <div class="inner-container">
                         <p>{{recipe.story}}</p>
                     </div>
                 </v-col>
@@ -36,8 +36,14 @@ export default {
 }
 
 .story-panel {
-    min-height: 297px;
+    /* min-height: 297px; */
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.inner-container p {
+    min-height: 200px;
+    max-height: 300px;
+    overflow: auto;
 }
 </style>

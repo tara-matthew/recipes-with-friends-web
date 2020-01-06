@@ -1,6 +1,6 @@
 <template>
     <v-col
-        cols="4"
+        cols="2"
         class="custom-padding pt-7">
         <panel
             title="Ingredients"
@@ -52,6 +52,7 @@ export default {
 .inner-container {
     min-height: 300px;
     max-height: 533px;
+    text-align: center;
     overflow: auto;
 }
 </style>

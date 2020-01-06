@@ -1,6 +1,6 @@
 <template>
     <v-col
-        cols="8"
+        cols="10"
         class="custom-padding pt-7">
         <panel
             title="Method"
