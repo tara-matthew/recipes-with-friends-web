@@ -49,7 +49,9 @@ export default {
             title: '',
             story: '',
             ingredients: '',
-            method: ''
+            method: '',
+            mainPhoto: null
+
         },
         error: null
     }),
@@ -58,6 +60,11 @@ export default {
         //Set recipe to the value which has bveen received from Info.vue
         EventBus.$on('sendRecipe', recipe => {
             this.recipe = recipe
+        }),
+
+        EventBus.$on('uploadedFile', file => {
+            // Sets the filepath of the main photo for the recipe to match what has been received on the server
+            this.recipe.mainPhoto = file.data
         })
     },
     methods: {

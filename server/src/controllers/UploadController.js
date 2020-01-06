@@ -10,8 +10,8 @@ module.exports = {
                 if (err) {
                     return res.send('fail')
                 } else {
-                    console.log(req)
-                    return res.send('success')
+                    return res.send(req.file.path)
+                    // return res.send(`You have uploaded this image: <hr/><img src="${req.file.path}" width="500"><hr /><a href="./">Upload another image</a>`)
                 }
             })
         } catch (err) {

@@ -47,7 +47,7 @@
                             id="drop1"
                             :options="dropOptions"
                             :useCustomSlot=true
-                            @vdropzone-file-added="dropzoneChangeUrl">
+                            @vdropzone-sending="dropzoneSuccess">
                             <div class="dropzone-text-container">
                                 <h3 class="green-colour">Drop some photos here</h3>
                                 <div>...or click to upload from your computer</div>
@@ -71,7 +71,7 @@
         data: () => ({
             dropOptions: {
                 method: "POST",
-                url: "http://localhost:8081/upload",
+                url: "https://httpbin.org/post",
                 header: {
                    'Access-Control-Allow-Origin': '*',
                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
@@ -93,13 +93,15 @@
         },
 
         methods: {
-            async dropzoneChangeUrl(file) {
-                await AuthenticationService.upload(file)
+            async dropzoneSuccess(file,xhr,formData) {
+                console.log(file, xhr, formData)
+                const uploadedFile = await AuthenticationService.upload(formData)
+                EventBus.$emit('uploadedFile', uploadedFile)
+
             },
 
             // Allows recipe to be shared with sibling components
             emitChange() {
-                console.log('changed')
                 EventBus.$emit('sendRecipe', this.recipe)
             }
         }
