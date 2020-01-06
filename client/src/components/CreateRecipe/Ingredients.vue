@@ -50,7 +50,7 @@ export default {
             story: '',
             ingredients: '',
             method: '',
-            mainPhoto: null
+            mainPhoto: ''
 
         },
         error: null
