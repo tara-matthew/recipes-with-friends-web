@@ -30,8 +30,16 @@ export default {
                     search: this.search
                 }
             }
+            // Dynamically change the route depending on what has been typed in
             this.$router.push(route)
-            console.log(value)
+        },
+
+        // add a watcher to the route itself, dynamically change the text in search box depending on the route
+        '$route.query.search': {
+            immediate: true,
+            handler(value) {
+                this.search = value
+            }
         }
     }
 }
