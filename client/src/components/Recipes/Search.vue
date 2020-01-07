@@ -13,6 +13,31 @@
     </panel>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            search: ''
+        }
+    },
+    watch: {
+        search(value) {
+            const route = {
+                name: 'recipes'
+            }
+            if (this.search !== '') {
+                route.query = {
+                    search: this.search
+                }
+            }
+            this.$router.push(route)
+            console.log(value)
+        }
+    }
+}
+
+</script>
+
 <style scoped>
 
 </style>
