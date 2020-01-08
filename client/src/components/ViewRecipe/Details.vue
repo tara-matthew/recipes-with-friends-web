@@ -28,15 +28,15 @@
                         class="px-12 py-12">
                         <div class="info-box">
                             <v-btn
-                                v-if="!bookmark"
+                                v-if="!bookmark && !isLoadingBookmarks"
                                 @click="setAsBookmark">
                                 I love this
                             </v-btn>
 
                             <v-btn
-                                v-if="bookmark"
+                                v-else-if="!isLoadingBookmarks"
                                 @click="unsetAsBookmark">
-                                One of my favourites
+                                Not one of my favourites anymore
                             </v-btn>
 
 
@@ -71,7 +71,8 @@ import BookmarkService from '@/services/BookmarkService'
 export default {
     data() {
         return {
-            bookmark: null
+            bookmark: null,
+            isLoadingBookmarks: true //Prevents small bug with button text changing whilst bookmarks are still being retrieved
         }
     },
     props: [
@@ -85,7 +86,7 @@ export default {
                 const bookmarks = (await BookmarkService.index({
                     recipeId: this.recipe.id
                 })).data
-                console.log(bookmarks)
+                this.isLoadingBookmarks = false;
                 if (bookmarks.length) {
                     this.bookmark = bookmarks[0]
                 }
