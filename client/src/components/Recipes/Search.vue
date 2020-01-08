@@ -7,7 +7,8 @@
         <v-text-field
             class="px-8"
             label="Search by title, ingredient, cuisine, or mood"
-            v-model="search">
+            v-model="search"
+            v-on:keyup.enter="searchRecipe">
         </v-text-field>
 
     </panel>
