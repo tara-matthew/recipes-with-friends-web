@@ -9,9 +9,11 @@ export default {
         return Api().get(`recipes/${recipeId}`)
     },
 
-    index(params) {
+    index(search) {
         return Api().get('recipes', {
-            params: params
+            params: {
+                search: search
+            }
         })
     }
 }

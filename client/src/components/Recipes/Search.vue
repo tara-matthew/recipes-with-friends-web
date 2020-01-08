@@ -41,6 +41,19 @@ export default {
                 this.search = value
             }
         }
+    },
+    methods: {
+        searchRecipe() {
+            const route = {
+                name: 'browse'
+            }
+            if (this.search !== '') {
+                route.query = {
+                    search: this.search
+                }
+            }
+            this.$router.push(route)
+        }
     }
 }
 

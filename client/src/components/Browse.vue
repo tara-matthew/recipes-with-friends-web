@@ -61,10 +61,14 @@ export default {
         }
     },
 
-    async mounted() {
+    watch: {
+        '$route.query.search': {
+            immediate: true,
+            async handler(value) {
+                this.recipes = (await RecipeService.index(value)).data
 
-        //Retrieves all recipes which have been added
-        this.recipes = (await RecipeService.index()).data
+            }
+        }
     }
 }
 </script>

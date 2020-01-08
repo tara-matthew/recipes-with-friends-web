@@ -1,6 +1,41 @@
 const {Recipe} = require ('../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = {
+
+    async index(req, res) {
+        try {
+            let recipes = null
+            const search = req.query.search
+
+            //If something has been searched
+            if (req.query.search) {
+                recipes = await Recipe.findAll({
+                    where: {
+                        [Op.or]: [
+                            'title', 'ingredients'
+                        ].map(key => ({
+                            [key]: {
+                                [Op.like]: `%${search}%`
+                            }
+                        }))
+                    }
+                })
+            } else {
+                //Otherwise get all recipes
+                recipes = await Recipe.findAll()
+            }
+
+            res.send(recipes)
+
+        } catch (error) {
+            res.status(500).send({
+                error: "Couldn't get recipes"
+            })
+        }
+    },
+
     async post(req, res) {
         try {
             const recipe = await Recipe.create(req.body)
@@ -8,17 +43,6 @@ module.exports = {
         } catch(error) {
             res.status(500).send({
                 error: "Couldn't create new recipe"
-            })
-        }
-    },
-
-    async index(req, res) {
-        try {
-            const recipes = await Recipe.findAll()
-            res.send(recipes)
-        } catch (error) {
-            res.status(500).send({
-                error: "Couldn't get recipes"
             })
         }
     },
