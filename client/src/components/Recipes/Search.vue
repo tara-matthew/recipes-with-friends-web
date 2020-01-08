@@ -21,7 +21,7 @@ export default {
         }
     },
     watch: {
-        search(value) {
+        search() {
             const route = {
                 name: 'recipes'
             }
@@ -32,6 +32,7 @@ export default {
             }
             // Dynamically change the route depending on what has been typed in
             this.$router.push(route)
+            // console.log(value)
         },
 
         // add a watcher to the route itself, dynamically change the text in search box depending on the route
