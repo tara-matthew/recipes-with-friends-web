@@ -27,7 +27,19 @@
                         cols="7"
                         class="px-12 py-12">
                         <div class="info-box">
-                            <h2>{{recipe.title}}</h2>
+                            <v-btn
+                                v-if="!bookmark"
+                                @click="setAsBookmark">
+                                I love this
+                            </v-btn>
+
+                            <v-btn
+                                v-if="bookmark"
+                                @click="unsetAsBookmark">
+                                One of my favourites
+                            </v-btn>
+
+
                             <div class="details">
                                 <v-row>
                                     <v-col
@@ -54,13 +66,55 @@
 </template>
 
 <script>
+import BookmarkService from '@/services/BookmarkService'
+
 export default {
+    data() {
+        return {
+            bookmark: null
+        }
+    },
     props: [
         'recipe'
     ],
 
-    mounted() {
-        console.log(this.recipe)
+    // use a watch instead of mounted, as this.recipe has not yet been defined when mounted
+    watch: {
+        async recipe() {
+            try {
+                const bookmarks = (await BookmarkService.index({
+                    recipeId: this.recipe.id
+                })).data
+                console.log(bookmarks)
+                if (bookmarks.length) {
+                    this.bookmark = bookmarks[0]
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    },
+
+    methods: {
+        async setAsBookmark() {
+            try {
+                console.log(this.recipe)
+                this.bookmark = (await BookmarkService.post({
+                    recipeId: this.recipe.id
+                })).data
+            } catch(err) {
+                console.log(err)
+            }
+        },
+
+        async unsetAsBookmark() {
+            try {
+                await BookmarkService.delete(this.bookmark.id)
+                this.bookmark = null
+            } catch (err) {
+                console.log(err)
+            }
+        }
     }
 }
 </script>
