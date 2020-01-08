@@ -16,6 +16,8 @@
                         cols="5">
                         <div class="photo-box">
                             <p class="photo-text"><img
+
+                                v-if="recipe.mainPhoto"
                                 v-bind:src="require(`../../../uploads/${recipe.mainPhoto}`)"
                                 height="300"
                                 width="300"/></p>
