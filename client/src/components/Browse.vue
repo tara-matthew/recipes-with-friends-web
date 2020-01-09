@@ -16,7 +16,10 @@
                     <div
                         v-for="recipe in recipes"
                         :key = "recipe.id">
-                        <v-card class="mt-12 recipe-container">
+                        <v-card
+                            class="mt-12 recipe-container"
+                            :id ="recipe.id"
+                            @click="goToRoute">
                             <v-row>
                                 <v-col
                                     align-self="center"
@@ -68,6 +71,18 @@ export default {
                 this.recipes = (await RecipeService.index(value)).data
 
             }
+        }
+    },
+
+    methods: {
+        goToRoute() {
+            const recipeId = event.currentTarget.id
+            this.$router.push({
+                name: 'viewRecipe',
+                params: {
+                    recipeId: recipeId
+                }
+            })
         }
     }
 }
