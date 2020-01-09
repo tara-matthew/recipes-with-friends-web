@@ -34,10 +34,11 @@ module.exports = {
 
     async post(req, res) {
         try {
-            const {recipeId} = req.body
+            const {recipeId, userId} = req.body
 
             const history = await History.create({
                 RecipeId: recipeId,
+                UserId: userId
             })
             res.send(history)
         } catch (err) {

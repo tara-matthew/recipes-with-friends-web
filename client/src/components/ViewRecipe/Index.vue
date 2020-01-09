@@ -47,6 +47,8 @@ export default {
         window.scrollTo(0,0);
 
         const recipeId = this.route.params.recipeId
+        const userId = this.user.id
+
         this.recipe = (await RecipeService.show(recipeId)).data
 
         // Convert the ingredients to an array
@@ -54,7 +56,8 @@ export default {
 
         // add history
         RecipeHistoryService.post({
-            recipeId: recipeId
+            recipeId: recipeId,
+            userId: userId
         })
     },
 
