@@ -32,7 +32,8 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items
-            v-if="$store.state.isUserLoggedIn">
+            v-if="$store.state.isUserLoggedIn"
+            @click="logout">
             <v-btn
                 text>
                 Sign Out
@@ -65,6 +66,20 @@
         </v-toolbar-items>
     </v-toolbar>
 </template>
+
+<script>
+export default {
+    methods: {
+        logout() {
+            this.$store.dispatch('setToken', null)
+            this.$store.dispatch('setUser', null)
+            this.$router.push({
+                name: 'recipes'
+            })
+        }
+    }
+}
+</script>
 
 <style scoped>
     .toolbar-title {
