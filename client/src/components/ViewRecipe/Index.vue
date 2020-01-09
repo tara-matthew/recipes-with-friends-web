@@ -34,6 +34,9 @@ export default {
     },
 
     async mounted() {
+        //Scroll to top of page
+        window.scrollTo(0,0);
+
         const recipeId = this.$store.state.route.params.recipeId
         this.recipe = (await RecipeService.show(recipeId)).data
 
