@@ -30,13 +30,13 @@
                         class="px-12 py-12">
                         <div class="info-box">
                             <v-btn
-                                v-if="!bookmark && !isLoadingBookmarks"
+                                v-if="isUserLoggedIn && !bookmark && !isLoadingBookmarks"
                                 @click="setAsBookmark">
                                 I love this
                             </v-btn>
 
                             <v-btn
-                                v-else-if="!isLoadingBookmarks"
+                                v-else-if="isUserLoggedIn && !isLoadingBookmarks"
                                 @click="unsetAsBookmark">
                                 Not one of my favourites anymore
                             </v-btn>
