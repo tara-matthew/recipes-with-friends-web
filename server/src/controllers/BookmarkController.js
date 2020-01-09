@@ -1,17 +1,38 @@
 const {
-    Bookmark
+    Bookmark,
+    Recipe
 } = require ('../models')
+
+const _ = require('lodash')
 
 module.exports = {
     async index(req, res) {
         try {
+            let bookmarks = null
             const {recipeId} = req.query
-
-            const bookmarks = await Bookmark.findAll({
-                where: {
-                    RecipeId: recipeId
-                }
+            if (recipeId) {
+                bookmarks = await Bookmark.findAll({
+                    where: {
+                        RecipeId: recipeId
+                    }
+                })
+            } else {
+                bookmarks = await Bookmark.findAll({
+                include: [
+                    {
+                        model: Recipe
+                    }
+                ]
             })
+                // parses the result of the query to JSON
+                .map(bookmark => bookmark.toJSON())
+
+                // combines bookmark.Recipe and bookmark into a new empty object
+                .map(bookmark => _.extend(
+                    {},
+                    bookmark.Recipe,
+                    bookmark))
+            }
 
             res.send(bookmarks)
 

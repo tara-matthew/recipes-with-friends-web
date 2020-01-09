@@ -17,36 +17,24 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                headers: [
-                    {
-                        text: 'Meal',
-                        value: 'name'
-                    }
-                ],
-                favourites: [
-                    {
-                        name: 'Chicken ramen'
-                    },
-                    {
-                        name: "Tarka dall"
-                    },
-                    {
-                        name: 'Roasted vegetable cous cous'
-                    },
-                    {
-                        name: 'Aubergine parmigiana'
-                    },
-                    {
-                        name: "Roasted vegetable cous cous"
-                    }
-                ],
+import BookmarkService from '@/services/BookmarkService'
 
-                justAdded: []
-            }
-        },
+export default {
+    data() {
+        return {
+            headers: [
+                {
+                    text: 'Meal',
+                    value: 'title'
+                }
+            ],
+            favourites: [],
+        }
+    },
+
+    async mounted() {
+        this.favourites = (await BookmarkService.index()).data
+    }
     }
 </script>
 
