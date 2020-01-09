@@ -18,37 +18,25 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                headers: [
-                    {
-                        text: 'Meal',
-                        value: 'name'
-                    }
-                ],
-                recentlyViewed: [
-                    {
-                        name: 'Chicken ramen'
-                    },
-                    {
-                        name: "Tarka dall"
-                    },
-                    {
-                        name: 'Roasted vegetable cous cous'
-                    },
-                    {
-                        name: 'Aubergine parmigiana'
-                    },
-                    {
-                        name: "Lamb koftas"
-                    }
-                ],
+import RecipeHistoryService from '@/services/RecipeHistoryService'
 
-                justAdded: []
-            }
-        },
+export default {
+    data() {
+        return {
+            headers: [
+                {
+                    text: 'Meal',
+                    value: 'title'
+                }
+            ],
+            recentlyViewed: [],
+        }
+    },
+
+    async mounted() {
+        this.recentlyViewed = (await RecipeHistoryService.index()).data
     }
+}
 </script>
 
 <style scoped>
