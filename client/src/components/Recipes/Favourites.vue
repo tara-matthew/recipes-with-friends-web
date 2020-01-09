@@ -11,8 +11,17 @@
             height="inherit"
             hide-default-header
             hide-default-footer>
-        </v-data-table>
 
+            <template v-slot:item="props">
+                <tr @click="goToRoute">
+                    <td
+                        :id="props.item.RecipeId"
+                        class="text-start">
+                        {{props.item.title}}
+                    </td>
+                </tr>
+            </template>
+        </v-data-table>
     </panel>
 </template>
 
@@ -34,8 +43,20 @@ export default {
 
     async mounted() {
         this.favourites = (await BookmarkService.index()).data
+    },
+
+    methods: {
+        goToRoute() {
+            const recipeId = event.target.id
+            this.$router.push({
+                name:'viewRecipe',
+                params: {
+                    recipeId: recipeId
+                }
+            })
+        }
     }
-    }
+}
 </script>
 
 <style scoped>
