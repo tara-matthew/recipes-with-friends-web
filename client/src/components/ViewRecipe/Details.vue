@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import BookmarkService from '@/services/BookmarkService'
 
 export default {
@@ -81,13 +82,21 @@ export default {
         'recipe'
     ],
 
+    computed: {
+        ...mapState([
+            'isUserLoggedIn',
+            'user'
+        ])
+    },
+
+
     // use a watch instead of mounted, as this.recipe has not yet been defined when mounted
     watch: {
         async recipe() {
             try {
                 const bookmarks = (await BookmarkService.index({
                     recipeId: this.recipe.id,
-                    userId: this.$store.state.user.id
+                    userId: this.user.id
                 })).data
                 this.isLoadingBookmarks = false;
                 if (bookmarks.length) {
