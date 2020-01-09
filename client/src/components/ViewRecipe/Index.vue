@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import PageHeader from '@/components/Header'
 import RecipeDetails from './Details'
 import RecipeStory from './Story'
@@ -33,11 +34,19 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState([
+            'isUserLoggedIn',
+            'user',
+            'route'
+        ])
+    },
+
     async mounted() {
         //Scroll to top of page
         window.scrollTo(0,0);
 
-        const recipeId = this.$store.state.route.params.recipeId
+        const recipeId = this.route.params.recipeId
         this.recipe = (await RecipeService.show(recipeId)).data
 
         // Convert the ingredients to an array

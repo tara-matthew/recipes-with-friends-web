@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import RecipeHistoryService from '@/services/RecipeHistoryService'
 
 export default {
@@ -39,6 +40,13 @@ export default {
             ],
             recentlyViewed: [],
         }
+    },
+
+    computed: {
+        ...mapState([
+            'isUserLoggedIn',
+            'user'
+        ])
     },
 
     async mounted() {
