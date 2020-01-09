@@ -15,13 +15,16 @@ module.exports = {
                 }
             ]
         })
+            // parses the result of the query to JSON
             .map(history=>history.toJSON())
+
+            // combines history.Recipe and history into a new empty object
             .map(history => _.extend (
                 {},
                 history.Recipe,
                 history
             ))
-            res.send(histories)
+            res.send(_.uniqBy(histories, history => history.RecipeId))
         } catch (err) {
             res.status(500).send({
                 error: 'error'
