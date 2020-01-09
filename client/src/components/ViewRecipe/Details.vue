@@ -86,7 +86,8 @@ export default {
         async recipe() {
             try {
                 const bookmarks = (await BookmarkService.index({
-                    recipeId: this.recipe.id
+                    recipeId: this.recipe.id,
+                    userId: this.$store.state.user.id
                 })).data
                 this.isLoadingBookmarks = false;
                 if (bookmarks.length) {
@@ -101,9 +102,9 @@ export default {
     methods: {
         async setAsBookmark() {
             try {
-                console.log(this.recipe)
                 this.bookmark = (await BookmarkService.post({
-                    recipeId: this.recipe.id
+                    recipeId: this.recipe.id,
+                    userId: this.$store.state.user.id
                 })).data
             } catch(err) {
                 console.log(err)

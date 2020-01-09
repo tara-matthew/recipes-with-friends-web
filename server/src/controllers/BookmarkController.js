@@ -9,15 +9,19 @@ module.exports = {
     async index(req, res) {
         try {
             let bookmarks = null
-            const {recipeId} = req.query
+            const {recipeId, userId} = req.query
             if (recipeId) {
                 bookmarks = await Bookmark.findAll({
                     where: {
-                        RecipeId: recipeId
+                        RecipeId: recipeId,
+                        UserId: userId
                     }
                 })
             } else {
                 bookmarks = await Bookmark.findAll({
+                where: {
+                    UserId: userId
+                },
                 include: [
                     {
                         model: Recipe
@@ -45,12 +49,13 @@ module.exports = {
 
     async post(req,res) {
         try {
-            const {recipeId} = req.body
+            const {recipeId, userId} = req.body
 
             // Check whether this recipe has already been bookmarked
             const bookmark = await Bookmark.findOne({
                 where: {
-                    RecipeId: recipeId
+                    RecipeId: recipeId,
+                    UserId: userId
                 }
             })
 
@@ -61,7 +66,8 @@ module.exports = {
             }
 
             const newBookmark = await Bookmark.create({
-                RecipeId: recipeId
+                RecipeId: recipeId,
+                UserId: userId
             })
 
             res.send(newBookmark)

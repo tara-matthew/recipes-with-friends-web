@@ -42,7 +42,9 @@ export default {
     },
 
     async mounted() {
-        this.favourites = (await BookmarkService.index()).data
+        this.favourites = (await BookmarkService.index({
+            userId: this.$store.state.user.id
+        })).data
     },
 
     methods: {
