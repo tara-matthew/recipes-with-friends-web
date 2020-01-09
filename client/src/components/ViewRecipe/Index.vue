@@ -24,7 +24,7 @@ import RecipeTips from './Tips'
 import RecipeIngredients from './Ingredients'
 import RecipeMethod from './Method'
 import RecipeService from '@/services/RecipeService'
-
+import RecipeHistoryService from '@/services/RecipeHistoryService'
 
 export default {
     data() {
@@ -32,12 +32,18 @@ export default {
             recipe: {}
         }
     },
+
     async mounted() {
         const recipeId = this.$store.state.route.params.recipeId
         this.recipe = (await RecipeService.show(recipeId)).data
 
         // Convert the ingredients to an array
         this.recipe.ingredients = this.convertToArray(this.recipe.ingredients)
+
+        // add history
+        RecipeHistoryService.post({
+            recipeId: recipeId
+        })
     },
 
     methods: {
