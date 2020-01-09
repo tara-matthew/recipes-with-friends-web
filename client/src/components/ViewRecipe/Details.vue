@@ -93,17 +93,26 @@ export default {
     // use a watch instead of mounted, as this.recipe has not yet been defined when mounted
     watch: {
         async recipe() {
-            try {
-                const bookmarks = (await BookmarkService.index({
-                    recipeId: this.recipe.id,
-                    userId: this.user.id
-                })).data
-                this.isLoadingBookmarks = false;
-                if (bookmarks.length) {
-                    this.bookmark = bookmarks[0]
+
+            // Only attempt to check whether the recipe has been bookmarked if there is a user logged in
+            if (!this.isUserLoggedIn) {
+                return
+            }
+
+            // Someone is logged in
+            else {
+                try {
+                    const bookmarks = (await BookmarkService.index({
+                        recipeId: this.recipe.id,
+                        userId: this.user.id
+                    })).data
+                    this.isLoadingBookmarks = false;
+                    if (bookmarks.length) {
+                        this.bookmark = bookmarks[0]
+                    }
+                } catch (err) {
+                    console.log(err)
                 }
-            } catch (err) {
-                console.log(err)
             }
         }
     },
