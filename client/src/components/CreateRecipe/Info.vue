@@ -29,7 +29,8 @@
                             placeholder="An old recipe from my mother"
                             label="What's the story?"
                             outlined
-                            v-model="recipe.story" />
+                            v-model="recipe.story"
+                            v-on:change="emitChange()" />
 
                         <div class="danger-alert" v-if="error">
                             {{error}}
@@ -83,7 +84,7 @@
                 title: '',
                 story: '',
                 ingredients: '',
-                method: ''
+                method: []
             },
             error: null
         }),

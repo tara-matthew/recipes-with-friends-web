@@ -13,17 +13,10 @@
                             v-model="recipe.ingredients"
                             outlined
                             label="What are the ingredients?"
-                            placeholder="noodles, ham,chicken,    eggs">
+                            placeholder="noodles, ham,chicken,    eggs"
+                            v-on:change="emitChange()">
                         </v-textarea>
 
-                        <v-card-actions class="justify-center">
-                            <v-btn
-                                color="#099E7A"
-                                class="mb-3 white--text"
-                                @click="saveRecipe">
-                                Save
-                            </v-btn>
-                        </v-card-actions>
                     </v-col>
 
                     <v-col
@@ -40,7 +33,6 @@
 </template>
 
 <script>
-import RecipeService from '@/services/RecipeService'
 import {EventBus} from '@/events/EventBus.js'
 
 export default {
@@ -49,7 +41,7 @@ export default {
             title: '',
             story: '',
             ingredients: '',
-            method: '',
+            method: [],
             mainPhoto: ''
 
         },
@@ -68,32 +60,9 @@ export default {
         })
     },
     methods: {
-        async saveRecipe() {
-            this.error = null
-
-            // Check that a title has been entered
-            const hasTitle = (Object
-                .values(this.recipe)[0].length) > 0
-
-            if (!hasTitle) {
-                this.error = 'Your recipe needs a title'
-                return
-            }
-
-
-            // Regex to remove whitespace
-            this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
-
-            try {
-                console.log(this.recipe)
-                await RecipeService.post(this.recipe)
-                this.$router.push({
-                    name: 'recipes'
-                })
-            } catch(error) {
-                console.log(error)
-            }
-        },
+        emitChange() {
+            EventBus.$emit('sendRecipe', this.recipe)
+        }
     }
 }
 </script>
