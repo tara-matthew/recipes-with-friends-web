@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         title: DataTypes.STRING,
         story: DataTypes.TEXT,
         ingredients: DataTypes.TEXT,
-        mainPhoto: DataTypes.STRING
-
+        mainPhoto: DataTypes.STRING,
+        method: DataTypes.JSON
     })
 
     return Recipe

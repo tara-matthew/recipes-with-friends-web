@@ -3,20 +3,37 @@
         "title":"Chicken ramen",
         "story":"An old recipe from my mother",
         "ingredients":"noodles, ham, chicken, eggs",
-        "mainPhoto":"1578479262648.jpg"
+        "mainPhoto":"1578479262648.jpg",
+        "method":[
+            "Crush garlic",
+            "Do not eat garlic",
+            "Fry garlic"
+        ]
     },
 
     {
         "title":"Roasted vegetable cous cous",
         "story":"I eat this all day every day I am cous cous",
         "ingredients":"cous cous, 2 aubergines, 2 courgettes, 500g mushrooms, garlic, 2 chillies",
-        "mainPhoto":"1578562964711.jpg"
+        "mainPhoto":"1578562964711.jpg",
+        "method":[
+            "Slice aubergines",
+            "Have a rest",
+            "Go to shop"
+        ]
     },
 
     {
         "title":"Lamb Koftas",
         "story":"A taste of home with lambs and sheep and cows and baa so tasty",
         "ingredients":"1 lamb, garlic, 10 chillies",
-        "mainPhoto":"1578563158644.jpg"
+        "mainPhoto":"1578563158644.jpg",
+        "method":[
+            "Raise animals",
+            "Befriend animals",
+            "Kill animals",
+            "Become sad",
+            "Eat meal"
+        ]
     }
 ]
