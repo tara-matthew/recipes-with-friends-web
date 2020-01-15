@@ -5,13 +5,17 @@
         <panel
             title="Method"
             panelColour="#036F55"
-            class="method-panel"
+            class="method-panel grey-background"
             id="method-panel">
-            <v-row>
+            <v-row
+                v-for="(method, index) in recipe.method"
+                :key="method">
                 <v-col
+                    align-self="center"
                     cols="6"
                     class="custom-padding px-12 py-12">
-                    <p>Step 1</p>
+                    <h1>Step {{index+1}}</h1>
+                    <p>{{method}}</p>
                 </v-col>
                 <v-col
                     cols="6"
@@ -80,5 +84,9 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
+}
+
+.grey-background {
+    background-color: #F8F4F2;
 }
 </style>
