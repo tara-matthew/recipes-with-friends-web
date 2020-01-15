@@ -5,11 +5,11 @@
             class="custom-padding pt-7">
 
             <panel
-                title="View Recipe"
+                :title="recipe.title"
                 panelColour="#099E7A"
                 class="title-box">
 
-                <v-row>
+                <v-row class="grey-background">
                     <v-col
                         align-self="center"
                         class="px-12 py-12"
@@ -148,7 +148,7 @@ export default {
 }
 
 .photo-box {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 259px;
     position: relative;
 }
@@ -181,5 +181,9 @@ p.no-margin {
 
 .bold-text {
     font-weight: bold;
+}
+
+.grey-background {
+    background-color: #F8F4F2;
 }
 </style>

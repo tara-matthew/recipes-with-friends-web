@@ -6,13 +6,13 @@
         <panel
             title="Story"
             panelColour="#099E7A"
-            class="story-panel">
+            class="story-panel grey-background">
             <v-row>
                 <v-col
                     cols="12"
                     class="px-12 py-12">
 
-                    <div class="inner-container">
+                    <div class="inner-container grey-background">
                         <p>{{recipe.story}}</p>
                     </div>
                 </v-col>
@@ -42,8 +42,12 @@ export default {
 }
 
 .inner-container p {
-    min-height: 200px;
+    min-height: 24px;
     max-height: 300px;
     overflow: auto;
+}
+
+.grey-background {
+    background-color: #F8F4F2;
 }
 </style>

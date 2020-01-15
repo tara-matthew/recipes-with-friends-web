@@ -6,8 +6,8 @@
         <panel
             title="Hot Tips"
             panelColour="#099E7A"
-            class="tips-panel">
-            <v-row>
+            class="tips-panel grey-background">
+            <v-row class="grey-background">
                 <v-col
                     cols="12"
                     class="px-12 py-12">
@@ -38,5 +38,9 @@ export default {
     min-height: 297px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.grey-background {
+    background-color: #F8F4F2;
 }
 </style>

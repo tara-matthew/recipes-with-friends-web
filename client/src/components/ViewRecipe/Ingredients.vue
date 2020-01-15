@@ -6,6 +6,7 @@
             title="Ingredients"
             panelColour="#08AC84"
             id="ingredients-panel"
+            class="grey-background"
             ref="ingredientsPanel">
             <v-row>
                 <v-col
@@ -54,5 +55,9 @@ export default {
     max-height: 533px;
     text-align: center;
     overflow: auto;
+}
+
+.grey-background {
+    background-color: #F8F4F2;
 }
 </style>
