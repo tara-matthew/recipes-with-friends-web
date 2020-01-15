@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         hooks: {
             beforeSave: hashPassword
-        }
+        },
+
+        freezeTableName: true
     })
 
     User.prototype.comparePassword = function (password) {

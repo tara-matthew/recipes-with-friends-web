@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
         ingredients: DataTypes.TEXT,
         mainPhoto: DataTypes.STRING,
         method: DataTypes.JSON
+    }, {
+        freezeTableName: true
     })
 
     return Recipe

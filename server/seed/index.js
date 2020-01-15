@@ -7,9 +7,9 @@ const {
 
 // Bluebird is to make sure that all the database has been seeded before doing anything else
 const Promise = require('bluebird')
-const users = require('./users.json')
-const recipes = require('./recipes.json')
-const bookmarks = require('./bookmarks.json')
+const users = require('./user.json')
+const recipes = require('./recipe.json')
+const bookmarks = require('./bookmark.json')
 
 
 sequelize.sync({force:true})
