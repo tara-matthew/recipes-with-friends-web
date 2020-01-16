@@ -36,22 +36,40 @@ module.exports = {
         }
     },
 
+
     post(req, res) {
         try {
-            const recipe = Recipe.create(req.body)
+            var ingredients = req.body.ingredients
+            const recipe = Recipe.create(req.body.information)
                 .then(function(createdRecipe) {
-                    return Ingredient.create({
-                        title: 'test'
-                    })
+                    return (ingredients.forEach(function(ingredient) {
+                        Ingredient.findOrCreate({
+                            where: {
+                                title: ingredient
+                            },
+                            defaults: {
+                                title: ingredient
+                            }
+                        }).spread(function(ingredient, created) {
+                            if (created) {
+                                console.log('created', created)
+                                return created
+                            } else {
+                                console.log(ingredient)
+                                return ingredient
+                            }
+                        })
+                        .then(function(createdIngredient) {
+                            // console.log(createdIngredient)
+                            return createdRecipe.addIngredient(createdIngredient)
 
-                    .then(function(createdIngredient) {
-                        return createdRecipe.addIngredient(createdIngredient)
-                    })
+                        })
+                    }))
                 })
                 .then(function(addedIngredient) {
                     console.log('success')
                 })
-            res.send(recipe)
+            // res.send(recipe)
         } catch(error) {
             res.status(500).send({
                 error: "Couldn't create new recipe"
