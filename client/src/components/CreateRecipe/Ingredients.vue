@@ -10,7 +10,7 @@
                         cols="6"
                         md="6">
                         <v-textarea
-                            v-model="recipe.ingredients"
+                            v-model="ingredients"
                             outlined
                             label="What are the ingredients?"
                             placeholder="noodles, ham,chicken,    eggs"
@@ -40,11 +40,11 @@ export default {
         recipe: {
             title: '',
             story: '',
-            ingredients: '',
-            method: [],
             mainPhoto: ''
-
         },
+        ingredients: '',
+        method: [],
+
         error: null
     }),
 
@@ -61,7 +61,9 @@ export default {
     },
     methods: {
         emitChange() {
-            EventBus.$emit('sendRecipe', this.recipe)
+            EventBus.$emit('sendRecipe', this.recipe),
+            EventBus.$emit('sendIngredients', this.ingredients)
+
         }
     }
 }

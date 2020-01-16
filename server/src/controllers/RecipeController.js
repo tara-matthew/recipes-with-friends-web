@@ -1,4 +1,4 @@
-const {Recipe} = require ('../models')
+const {Recipe, Ingredient, RecipeIngredient} = require ('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -36,9 +36,21 @@ module.exports = {
         }
     },
 
-    async post(req, res) {
+    post(req, res) {
         try {
-            const recipe = await Recipe.create(req.body)
+            const recipe = Recipe.create(req.body)
+                .then(function(createdRecipe) {
+                    return Ingredient.create({
+                        title: 'test'
+                    })
+
+                    .then(function(createdIngredient) {
+                        return createdRecipe.addIngredient(createdIngredient)
+                    })
+                })
+                .then(function(addedIngredient) {
+                    console.log('success')
+                })
             res.send(recipe)
         } catch(error) {
             res.status(500).send({

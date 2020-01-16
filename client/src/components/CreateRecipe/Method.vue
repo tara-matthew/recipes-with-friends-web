@@ -15,10 +15,9 @@
                                 outlined
                                 rows="6"
                                 auto-grow
-                                v-for="(input, key) in inputs"
+                                v-for="(input) in inputs"
                                 :label ="input.label"
                                 :key = "input.id"
-                                v-model="recipe.method[key]"
                                 v-on:change="emitChange()"
                                 placeholder="Crush garlic">
                             </v-textarea>
@@ -98,10 +97,10 @@ export default {
        recipe: {
            title: '',
            story: '',
-           ingredients: '',
-           method: []
        },
-        counter: 1,
+       ingredients: '',
+       method: [],
+       counter: 1,
         inputs: [{
             id: 'method1',
             label: 'How do you make it?',
@@ -112,6 +111,10 @@ export default {
     mounted() {
         EventBus.$on('sendRecipe', recipe => {
             this.recipe = recipe
+        }),
+
+        EventBus.$on('sendIngredients', ingredients => {
+            this.ingredients = ingredients
         })
     },
 
@@ -140,9 +143,6 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
-
-            // Regex to remove whitespace
-            this.recipe.ingredients = this.recipe.ingredients.replace(/\s{2,}/g,' ');
 
             try {
                 await RecipeService.post(this.recipe)
