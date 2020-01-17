@@ -95,8 +95,12 @@ export default {
            },
        },
        recipe: {
-           title: '',
-           story: '',
+           information: {
+               title: '',
+               story: '',
+               mainPhoto: ''
+           },
+           ingredients: ''
        },
        ingredients: '',
        method: [],
@@ -137,12 +141,15 @@ export default {
 
             // Check that a title has been entered
             const hasTitle = (Object
-                .values(this.recipe)[0].length) > 0
+                .values(this.recipe)[0]['title'].length) > 0
 
             if (!hasTitle) {
                 this.error = 'Your recipe needs a title'
                 return
             }
+
+            // Regex to remove whitespace and split ingredients into an array
+            this.recipe.ingredients = this.recipe.ingredients.split(/[ ,]+/)
 
             try {
                 await RecipeService.post(this.recipe)

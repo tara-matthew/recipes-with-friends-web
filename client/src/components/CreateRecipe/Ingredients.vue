@@ -10,7 +10,7 @@
                         cols="6"
                         md="6">
                         <v-textarea
-                            v-model="ingredients"
+                            v-model="recipe.ingredients"
                             outlined
                             label="What are the ingredients?"
                             placeholder="noodles, ham,chicken,    eggs"
@@ -38,9 +38,12 @@ import {EventBus} from '@/events/EventBus.js'
 export default {
     data: () => ({
         recipe: {
-            title: '',
-            story: '',
-            mainPhoto: ''
+            information: {
+                title: '',
+                story: '',
+                mainPhoto: ''
+            },
+            ingredients: ''
         },
         ingredients: '',
         method: [],

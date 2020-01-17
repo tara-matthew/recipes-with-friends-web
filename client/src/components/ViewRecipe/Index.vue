@@ -50,9 +50,6 @@ export default {
 
         this.recipe = (await RecipeService.show(recipeId)).data
 
-        // Convert the ingredients to an array
-        this.recipe.ingredients = this.convertToArray(this.recipe.ingredients)
-
         // add history if a user is logged in
         if (this.isUserLoggedIn) {
             RecipeHistoryService.post({

@@ -20,7 +20,7 @@
                             outlined
                             label="What did you make?"
                             placeholder="Chicken Ramen"
-                            v-model="recipe.title"
+                            v-model="recipe.information.title"
                             v-on:change="emitChange()" />
 
                         <v-textarea
@@ -29,7 +29,7 @@
                             placeholder="An old recipe from my mother"
                             label="What's the story?"
                             outlined
-                            v-model="recipe.story"
+                            v-model="recipe.information.story"
                             v-on:change="emitChange()" />
 
                         <div class="danger-alert" v-if="error">
@@ -81,11 +81,16 @@
                },
            },
             recipe: {
-                title: '',
-                story: '',
-                ingredients: '',
-                method: []
+                information: {
+                    title: '',
+                    story: '',
+                    mainPhoto: ''
+                },
+                ingredients: ''
             },
+            ingredients: '',
+            method: [],
+
             error: null
         }),
 
