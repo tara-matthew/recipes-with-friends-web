@@ -36,6 +36,12 @@ module.exports = {
         }
     },
 
+    /**
+     * [Posts recipe data to the Recipe, Ingredients and RecipeIngredients tables]
+     * @param  {[object]}  req [request object]
+     * @param  {[object]}  res [response object]
+     * @return {Promise}     [completed Promise]
+     */
 
     async post(req, res) {
         try {
