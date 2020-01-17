@@ -37,39 +37,42 @@ module.exports = {
     },
 
 
-    post(req, res) {
+    async post(req, res) {
         try {
             var ingredients = req.body.ingredients
-            const recipe = Recipe.create(req.body.information)
+            const recipe = await Recipe.create(req.body.information)
                 .then(function(createdRecipe) {
-                    return (ingredients.forEach(function(ingredient) {
-                        Ingredient.findOrCreate({
+                    ingredients.map(async function(ingredient) {
+                        // Query the db to see if there are any matching ingredients already
+                        Ingredient.count({
                             where: {
                                 title: ingredient
                             },
-                            defaults: {
-                                title: ingredient
-                            }
-                        }).spread(function(ingredient, created) {
-                            if (created) {
-                                console.log('created', created)
-                                return created
+                        }).then(function(count) {
+                            // Does already exist
+                            if (count > 0) {
+                                // Return this data into the function
+                                return Ingredient.findOne({
+                                    where: {
+                                        title: ingredient
+                                    }
+                                })
                             } else {
-                                console.log(ingredient)
-                                return ingredient
-                            }
-                        })
-                        .then(function(createdIngredient) {
-                            // console.log(createdIngredient)
-                            return createdRecipe.addIngredient(createdIngredient)
+                                // Create the ingredient and return this
+                                return Ingredient.create({
+                                    title: ingredient
+                                })
 
+                            }
+                        }).then(function(createdIngredient) {
+                            // Add this data into the RecipeIngredient table
+                            return createdRecipe.addIngredient(createdIngredient)
+                        }).then(function(added) {
+                            // Once this is all done, return to home dashboard
+                            res.send(recipe)
                         })
-                    }))
+                    })
                 })
-                .then(function(addedIngredient) {
-                    console.log('success')
-                })
-            // res.send(recipe)
         } catch(error) {
             res.status(500).send({
                 error: "Couldn't create new recipe"
