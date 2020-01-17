@@ -62,7 +62,6 @@ module.exports = {
                                 return Ingredient.create({
                                     title: ingredient
                                 })
-
                             }
                         }).then(function(createdIngredient) {
                             // Add this data into the RecipeIngredient table
