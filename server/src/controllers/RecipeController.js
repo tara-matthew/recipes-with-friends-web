@@ -1,4 +1,4 @@
-const {Recipe, Ingredient, RecipeIngredient} = require ('../models')
+const {Recipe, Ingredient} = require ('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -88,8 +88,15 @@ module.exports = {
     async show(req,res) {
         try {
             const recipeId = req.params.recipeId
-            const recipe = await Recipe.findByPk(recipeId)
-            res.send(recipe)
+            const recipe = await Recipe.findAll({
+                where: {
+                    id: recipeId,
+                },
+                include: [{
+                    model: Ingredient,
+                }],
+            })
+            res.send(recipe[0])
         } catch(error) {
             res.status(500).send({
                 error: 'Could not retrieve recipe'
