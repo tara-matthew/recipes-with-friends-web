@@ -14,7 +14,7 @@
                     class="px-12 py-12">
                     <div class="inner-container">
 
-                        <p v-for="ingredient in recipe.ingredients" v-bind:key="ingredient">{{ingredient}}</p>
+                        <p v-for="ingredient in ingredients" v-bind:key="ingredient">{{ingredient}}</p>
 
                     </div>
                 </v-col>
@@ -29,6 +29,12 @@ import {EventBus} from '@/events/EventBus.js'
 
 export default {
 
+    data() {
+        return {
+            ingredients: []
+        }
+    },
+
     props: [
         'recipe'
     ],
@@ -39,6 +45,14 @@ export default {
         this.$nextTick(function() {
             EventBus.$emit('height', document.getElementById('ingredients-panel').offsetHeight)
         })
+
+    },
+
+    watch: {
+        async recipe() {
+            this.recipe.Ingredients.map(ingredient => this.ingredients.push(ingredient.title))
+        }
+
     }
 }
 
