@@ -4,12 +4,12 @@
         <v-container fill-height fluid>
             <recipe-details :recipe="recipe" />
             <v-row>
-                <recipe-story :recipe="recipe" />
-                <recipe-tips :recipe="recipe" />
+                <recipe-story v-if="recipe" :recipe="recipe" />
+                <recipe-tips v-if="recipe" :recipe="recipe" />
             </v-row>
             <v-row>
                 <recipe-ingredients v-if="recipe" :recipe="recipe"></recipe-ingredients>
-                <recipe-method :recipe="recipe" />
+                <recipe-method v-if="recipe" :recipe="recipe" />
             </v-row>
         </v-container>
     </div>
