@@ -12,15 +12,19 @@ module.exports = {
             //If something has been searched
             if (req.query.search) {
                 recipes = await Recipe.findAll({
+                    include: [{
+                        model: Ingredient,
+                    }],
                     where: {
                         [Op.or]: [
-                            'title', 'ingredients'
-                        ].map(key => ({
-                            [key]: {
-                                [Op.like]: `%${search}%`
+                            {title:
+                                {[Op.like]: `%${search}%`}
+                            },
+                            {'$Ingredients.title$':
+                                {[Op.like]: `%${search}%`}
                             }
-                        }))
-                    }
+                        ]
+                    },
                 })
             } else {
                 //Otherwise get all recipes
