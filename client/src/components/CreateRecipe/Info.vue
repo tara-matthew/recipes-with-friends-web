@@ -103,7 +103,6 @@
                 console.log(file, xhr, formData)
                 const uploadedFile = await AuthenticationService.upload(formData)
                 EventBus.$emit('uploadedFile', uploadedFile)
-
             },
 
             // Allows recipe to be shared with sibling components

@@ -59,14 +59,13 @@ export default {
 
         EventBus.$on('uploadedFile', file => {
             // Sets the filepath of the main photo for the recipe to match what has been received on the server
-            this.recipe.mainPhoto = file.data
+            this.recipe.information.mainPhoto = file.data
         })
     },
     methods: {
         emitChange() {
             EventBus.$emit('sendRecipe', this.recipe),
             EventBus.$emit('sendIngredients', this.ingredients)
-
         }
     }
 }
