@@ -28,7 +28,7 @@
                                     <p class="title-text">{{recipe.title}}</p>
                                     <p>{{recipe.story}}</p>
                                     <p>Needs {{recipe.ingredients}}</p>
-                                    <p>Takes {{time}}</p>
+                                    <p>Takes 200 mins</p>
                                 </v-col>
 
                                 <v-col
