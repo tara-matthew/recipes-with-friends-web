@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
         title: DataTypes.STRING,
         story: DataTypes.TEXT,
         mainPhoto: DataTypes.STRING,
-        method: DataTypes.JSON
     }, {
         freezeTableName: true
     })

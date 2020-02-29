@@ -4,7 +4,9 @@ const {
     Recipe,
     Bookmark,
     Ingredient,
-    RecipeIngredient
+    RecipeIngredient,
+    Step,
+    RecipeStep
 } = require('../src/models')
 
 // Bluebird is to make sure that all the database has been seeded before doing anything else
@@ -14,6 +16,8 @@ const recipes = require('./recipe.json')
 const bookmarks = require('./bookmark.json')
 const ingredients = require('./ingredient.json')
 const recipeIngredients = require('./recipeIngredient.json')
+const steps = require('./step.json')
+const recipeSteps = require('./recipeStep.json')
 
 
 sequelize.sync({force:true})
@@ -45,6 +49,18 @@ sequelize.sync({force:true})
         await Promise.all(
             recipeIngredients.map(recipeIngredient => {
                 RecipeIngredient.create(recipeIngredient)
+            })
+        )
+
+        await Promise.all(
+            steps.map(step => {
+                Step.create(step)
+            })
+        )
+
+        await Promise.all(
+            recipeSteps.map(recipeStep => {
+                RecipeStep.create(recipeStep)
             })
         )
     })
