@@ -45,7 +45,6 @@ export default {
             },
             ingredients: ''
         },
-        ingredients: '',
         method: [],
 
         error: null

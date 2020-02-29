@@ -88,7 +88,6 @@
                 },
                 ingredients: ''
             },
-            ingredients: '',
             method: [],
 
             error: null

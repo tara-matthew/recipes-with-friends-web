@@ -102,7 +102,6 @@ export default {
            },
            ingredients: ''
        },
-       ingredients: '',
        method: [],
        counter: 1,
         inputs: [{
