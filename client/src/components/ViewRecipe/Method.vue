@@ -8,14 +8,14 @@
             class="method-panel grey-background"
             id="method-panel">
             <v-row
-                v-for="(method, index) in recipe.method"
-                :key="method">
+                v-for="(step, index) in steps"
+                v-bind:key="step">
                 <v-col
                     align-self="center"
                     cols="6"
                     class="custom-padding px-12 py-12">
                     <h1>Step {{index+1}}</h1>
-                    <p>{{method}}</p>
+                    <p>{{step}}</p>
                 </v-col>
                 <v-col
                     cols="6"
@@ -49,14 +49,28 @@
 import {EventBus} from '@/events/EventBus.js'
 
 export default {
+    data() {
+        return {
+            steps: []
+        }
+    },
+
     props: [
         'recipe'
     ],
+
     mounted() {
         const methodPanel = document.getElementById('method-panel')
         EventBus.$on('height', val => {
             methodPanel.style.height = val + 'px'
         })
+    },
+
+    watch: {
+        async recipe() {
+            // Push the title of every entry in the Steps index of the recipe array into its own steps array
+            this.recipe.Steps.map(step => this.steps.push(step.title))
+        }
     }
 }
 </script>

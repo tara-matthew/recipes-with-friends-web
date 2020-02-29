@@ -129,9 +129,14 @@ module.exports = {
                 where: {
                     id: recipeId,
                 },
-                include: [{
-                    model: Ingredient,
-                }],
+                include: [
+                    {
+                        model: Ingredient,
+                    },
+                    {
+                        model: Step
+                    }
+                ],
             })
             res.send(recipe[0])
         } catch(error) {
