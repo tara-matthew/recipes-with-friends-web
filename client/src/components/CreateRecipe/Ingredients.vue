@@ -63,8 +63,7 @@ export default {
     },
     methods: {
         emitChange() {
-            EventBus.$emit('sendRecipe', this.recipe),
-            EventBus.$emit('sendIngredients', this.ingredients)
+            EventBus.$emit('sendRecipe', this.recipe)
         }
     }
 }
