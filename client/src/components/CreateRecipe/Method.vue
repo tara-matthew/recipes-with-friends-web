@@ -131,8 +131,7 @@ export default {
         },
 
         emitChange() {
-            EventBus.$emit('sendRecipe', this.recipe),
-            EventBus.$emit('uploadedFile', this.recipe.information.mainPhoto)
+            EventBus.$emit('sendRecipe', this.recipe)
         },
 
         async saveRecipe() {
