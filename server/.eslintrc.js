@@ -5,7 +5,6 @@ module.exports = {
         "node": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:vue/essential"
     ],
     "globals": {
@@ -20,5 +19,6 @@ module.exports = {
         "vue"
     ],
     "rules": {
+        "strict": "off"
     }
 };
