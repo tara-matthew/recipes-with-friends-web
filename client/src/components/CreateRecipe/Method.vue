@@ -15,10 +15,11 @@
                                 outlined
                                 rows="6"
                                 auto-grow
-                                v-for="(input) in inputs"
+                                v-for="(input, index) in inputs"
                                 :label ="input.label"
                                 :key = "input.id"
                                 v-on:change="emitChange()"
+                                v-model="recipe.steps[index]"
                                 placeholder="Crush garlic">
                             </v-textarea>
 
@@ -77,8 +78,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import {EventBus} from '@/events/EventBus.js'
 import RecipeService from '@/services/RecipeService'
 
-
-
 export default {
     data: () => ({
         dropOptions: {
@@ -99,9 +98,9 @@ export default {
                story: '',
                mainPhoto: ''
            },
-           ingredients: ''
+           ingredients: '',
+           steps: [],
        },
-       method: [],
        counter: 1,
         inputs: [{
             id: 'method1',

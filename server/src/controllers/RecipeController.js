@@ -50,7 +50,7 @@ module.exports = {
     async post(req, res) {
         try {
             var ingredients = req.body.ingredients
-            var steps = ['test1', 'test2']
+            var steps = req.body.steps
             const recipe = await Recipe.create(req.body.information)
                 .then(function(createdRecipe) {
                         // Adding ingredients

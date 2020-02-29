@@ -86,9 +86,10 @@
                     story: '',
                     mainPhoto: ''
                 },
-                ingredients: ''
+                ingredients: '',
+                steps: []
+
             },
-            method: [],
 
             error: null
         }),
