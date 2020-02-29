@@ -46,8 +46,7 @@
                                 ref="vueDropzone"
                                 id="drop1"
                                 :options="dropOptions"
-                                :useCustomSlot=true
-                                @vdropzone-file-added="dropzoneChangeUrl">
+                                :useCustomSlot=true>
                                 <div class="dropzone-text-container">
                                     <h3 class="green-colour">Drop photos of this step here</h3>
                                     <div>...or click to upload from your computer</div>
