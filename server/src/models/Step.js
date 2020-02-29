@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-    const Steps = sequelize.define('Steps', {
+    const Step = sequelize.define('Step', {
         title: DataTypes.STRING,
     }, {
         freezeTableName: true
     })
 
-    Ingredient.associate = function(models) {
-        Ingredient.belongsToMany(models.Recipe, { through: 'RecipeIngredient'})
+    Step.associate = function(models) {
+        Step.belongsToMany(models.Recipe, { through: 'RecipeStep'})
     }
 
-    return Ingredient
+    return Step
 }
