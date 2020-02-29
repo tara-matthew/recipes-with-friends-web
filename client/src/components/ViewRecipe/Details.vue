@@ -15,12 +15,21 @@
                         class="px-12 py-12"
                         cols="5">
                         <div class="photo-box">
-                            <p class="photo-text"><img
+                            <p class="photo-text">
+                                <img
 
-                                v-if="recipe.mainPhoto"
-                                v-bind:src="require(`../../../uploads/${recipe.mainPhoto}`)"
-                                height="300"
-                                width="300"/></p>
+                                    v-if="recipe.mainPhoto"
+                                    v-bind:src="require(`../../../uploads/${recipe.mainPhoto}`)"
+                                    height="300"
+                                    width="300"/>
+
+                                <img
+                                    v-else
+                                    src="../../assets/stockFood.jpg"
+                                    height="300"
+                                    width="300"
+                                    />
+                            </p>
 
                         </div>
                     </v-col>
