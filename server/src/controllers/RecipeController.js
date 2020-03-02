@@ -51,70 +51,65 @@ module.exports = {
         try {
             var ingredients = req.body.ingredients
             var steps = req.body.steps
+
             const recipe = await Recipe.create(req.body.information)
-                .then(function(createdRecipe) {
-                        // Adding ingredients
-
-                        ingredients.map(async function (ingredient) {
-                            // Query the db to see if there are any matching ingredients already
-                            Ingredient.count({
-                                where: {
-                                    title: ingredient
-                                },
-                            }).then(function (count) {
-                                // Does already exist
-                                if (count > 0) {
-                                    // Return this data into the function
-                                    return Ingredient.findOne({
-                                        where: {
-                                            title: ingredient
-                                        }
-                                    })
-                                } else {
-                                    // Create the ingredient and return this
-                                    return Ingredient.create({
+                .then(async function(createdRecipe) {
+                    // Adding ingredients
+                    for (const ingredient of ingredients) {
+                        await Ingredient.count({
+                            where: {
+                                title: ingredient
+                            }
+                        }).then(async function (count) {
+                            // Does already exist
+                            if (count > 0) {
+                                // Return this data into the function
+                                return Ingredient.findOne({
+                                    where: {
                                         title: ingredient
-                                    })
-                                }
-                            }).then(function (createdIngredient) {
-                                // Add this data into the RecipeIngredient table
-                                return createdRecipe.addIngredient(createdIngredient)
-                            })
-                        })
-
-                        // Adding recipe steps
-
-                        steps.map(async function (step) {
-                            // Query the db to see if there are any matching steps already
-                            Step.count({
-                                where: {
-                                    title: step
-                                },
-                            }).then(function (count) {
-                                // Does already exist
-                                if (count > 0) {
-                                    // Return this data into the function
-                                    return Step.findOne({
-                                        where: {
-                                            title: step
-                                        }
-                                    })
-                                } else {
-                                    // Create the step and return this
-                                    return Step.create({
-                                        title: step
-                                    })
-                                }
-                            }).then(function (createdStep) {
-                                // Add this data into the RecipeStep table
-                                return createdRecipe.addStep(createdStep)
-                            }).then(function (added) {
-                                // Once this is all done, return to home dashboard
-                                res.send(recipe)
-                            })
+                                    }
+                                })
+                            } else {
+                                // Create the ingredient and return this
+                                return Ingredient.create({
+                                    title: ingredient
+                                })
+                            }
+                        }).then(async function (createdIngredient) {
+                            // Add this data into the RecipeIngredient table
+                            return createdRecipe.addIngredient(createdIngredient)
                         })
                     }
-                )
+
+                    // Adding steps
+                    for (const step of steps) {
+                        await Step.count({
+                            where: {
+                                title: step
+                            }
+                        }).then(async function (count) {
+                            // Does already exist
+                            if (count > 0) {
+                                // Return this data into the function
+                                return Step.findOne({
+                                    where: {
+                                        title: step
+                                    }
+                                })
+                            } else {
+                                // Create the step and return this
+                                return Step.create({
+                                    title: step
+                                })
+                            }
+                        }).then(async function (createdStep) {
+                            // Add this data into the RecipeStep table
+                            return createdRecipe.addStep(createdStep)
+                        })
+                    }
+                })
+            //Once this is all done return to home dashboard
+            res.send(recipe)
         } catch(error) {
             res.status(500).send({
                 error: "Couldn't create new recipe"
