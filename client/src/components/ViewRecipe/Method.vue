@@ -9,37 +9,30 @@
             id="method-panel">
             <v-row
                 v-for="(step, index) in steps"
-                v-bind:key="step">
+                v-bind:key="index">
                 <v-col
                     align-self="center"
                     cols="6"
                     class="custom-padding px-12 py-12">
                     <h1>Step {{index+1}}</h1>
-                    <p>{{step}}</p>
+                    <p>{{step.title}}</p>
                 </v-col>
                 <v-col
                     cols="6"
                     class="custom-padding px-12 py-12">
                     <div class="photo-box">
-                        <p class="photo-text">Photo here</p>
+                        <p class="photo-text">
+                            <img
+                                v-if="step.photo"
+                                v-bind:src="require(`@/../uploads/${step.photo}`)"
+                                height="300"
+                                width="300"
+                            />
+                        </p>
                     </div>
                 </v-col>
             </v-row>
 
-            <v-row>
-                <v-col
-                    cols="6"
-                    class="custom-padding px-12 py-12">
-                    <p>Step 1</p>
-                </v-col>
-                <v-col
-                    cols="6"
-                    class="custom-padding px-12 py-12">
-                    <div class="photo-box">
-                        <p class="photo-text">Photo here</p>
-                    </div>
-                </v-col>
-            </v-row>
         </panel>
     </v-col>
 
@@ -69,7 +62,12 @@ export default {
     watch: {
         async recipe() {
             // Push the title of every entry in the Steps index of the recipe array into its own steps array
-            this.recipe.Steps.map(step => this.steps.push(step.title))
+            this.recipe.Steps.map(
+                step => this.steps.push({
+                'title': step.title,
+                'photo': step.RecipeStep.photo
+                }),
+            )
         }
     }
 }
