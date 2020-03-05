@@ -2,7 +2,7 @@
     <div>
         <page-header />
         <v-container fill-height fluid>
-            <recipe-details :recipe="recipe" />
+            <recipe-details v-if="recipe" :recipe="recipe" />
             <v-row>
                 <recipe-story v-if="recipe" :recipe="recipe" />
                 <recipe-tips v-if="recipe" :recipe="recipe" />
