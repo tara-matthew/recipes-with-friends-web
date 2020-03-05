@@ -18,13 +18,13 @@
                             <p class="photo-text">
                                 <img
 
-                                    v-if="recipe.mainPhoto"
+                                    v-if="recipe && recipe.mainPhoto && !isLoading"
                                     v-bind:src="require(`../../../uploads/${recipe.mainPhoto}`)"
                                     height="300"
                                     width="300"/>
 
                                 <img
-                                    v-else
+                                    v-else-if="!isLoading"
                                     src="../../assets/stockFood.jpg"
                                     height="300"
                                     width="300"
@@ -39,13 +39,13 @@
                         class="px-12 py-12">
                         <div class="info-box">
                             <v-btn
-                                v-if="isUserLoggedIn && !bookmark && !isLoadingBookmarks"
+                                v-if="isUserLoggedIn && !bookmark && !isLoading"
                                 @click="setAsBookmark">
                                 I love this
                             </v-btn>
 
                             <v-btn
-                                v-else-if="isUserLoggedIn && !isLoadingBookmarks"
+                                v-else-if="isUserLoggedIn && !isLoading"
                                 @click="unsetAsBookmark">
                                 Not one of my favourites anymore
                             </v-btn>
@@ -84,7 +84,7 @@ export default {
     data() {
         return {
             bookmark: null,
-            isLoadingBookmarks: true //Prevents small bug with button text changing whilst bookmarks are still being retrieved
+            isLoading: true //Prevents small bug with button text changing whilst bookmarks are still being retrieved
         }
     },
     props: [
@@ -115,7 +115,7 @@ export default {
                         recipeId: this.recipe.id,
                         userId: this.user.id
                     })).data
-                    this.isLoadingBookmarks = false;
+                    this.isLoading = false;
                     if (bookmarks.length) {
                         this.bookmark = bookmarks[0]
                     }
