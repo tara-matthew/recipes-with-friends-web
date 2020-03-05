@@ -19,7 +19,7 @@
                                 <img
 
                                     v-if="recipe && recipe.mainPhoto && !isLoading"
-                                    v-bind:src="require(`../../../uploads/${recipe.mainPhoto}`)"
+                                    v-bind:src="require(`@/../uploads/${recipe.mainPhoto}`)"
                                     height="300"
                                     width="300"/>
 
