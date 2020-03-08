@@ -44,7 +44,10 @@ export default {
                 mainPhoto: ''
             },
             ingredients: '',
-            steps: [],
+            steps: [{
+                'title': '',
+                'photo': ''
+            }],
         },
 
         error: null

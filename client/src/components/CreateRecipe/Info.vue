@@ -87,7 +87,10 @@
                     mainPhoto: ''
                 },
                 ingredients: '',
-                steps: []
+                steps: [{
+                    'title': '',
+                    'photo': ''
+                }],
 
             },
 

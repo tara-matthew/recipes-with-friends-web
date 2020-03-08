@@ -99,7 +99,10 @@ export default {
                mainPhoto: ''
            },
            ingredients: '',
-           steps: [],
+           steps: [{
+               'title': '',
+               'photo': ''
+           }],
        },
        counter: 1,
         inputs: [{
