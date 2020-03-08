@@ -19,7 +19,7 @@
                                 :label ="input.label"
                                 :key = "input.id"
                                 v-on:change="emitChange()"
-                                v-model="recipe.steps[index]"
+                                v-model="recipe.steps[index].title"
                                 placeholder="Crush garlic">
                             </v-textarea>
 
