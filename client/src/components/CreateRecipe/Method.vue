@@ -40,14 +40,15 @@
                         cols="6"
                         >
                         <div
-                            class="input-area"
-                            v-for="input in inputs"
-                            :key = "input.id">
+                            class="input-area">
                             <vue-dropzone
+                                v-for="input in inputs"
+                                :key = "input.id"
                                 ref="vueDropzone"
-                                id="drop1"
+                                :id="input.id"
                                 :options="dropOptions"
-                                :useCustomSlot=true>
+                                :useCustomSlot=true
+                                @vdropzone-sending="dropzoneSuccess">
                                 <div class="dropzone-text-container">
                                     <h3 class="green-colour">Drop photos of this step here</h3>
                                     <div>...or click to upload from your computer</div>
@@ -77,12 +78,13 @@ import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import {EventBus} from '@/events/EventBus.js'
 import RecipeService from '@/services/RecipeService'
+import AuthenticationService from '@/services/AuthenticationService'
 
 export default {
     data: () => ({
         dropOptions: {
             method: "POST",
-            url: "http://localhost:8081/upload",
+            url: "https://httpbin.org/post",
             thumbnailWidth: 90, // px
             thumbnailHeight: 90,
             header: {
@@ -121,11 +123,29 @@ export default {
             // Sets the filepath of the main photo for the recipe to match what has been received on the server
             this.recipe.information.mainPhoto = file.data
         })
+
+        EventBus.$on('stepPhoto', file => {
+            // Sets the filepath of the photo for the correct index of the step to match what has been received on the server
+            this.recipe.steps[file.stepNumber].photo = file.data
+        })
     },
 
 
     methods: {
+        async dropzoneSuccess(file,xhr,formData) {
+            const clickedStep = parseInt((file.previewElement.offsetParent.id).match(/\d+/)[0])-1
+            const stepPhoto = await AuthenticationService.upload(formData)
+            stepPhoto['stepNumber'] = clickedStep
+            EventBus.$emit('stepPhoto', stepPhoto)
+        },
+
         addInput() {
+            // Push a new index to this.recipe.steps
+            this.recipe.steps.push({
+                'title': '',
+                'photo': ''
+            }),
+
             this.inputs.push({
                 id: `method${++this.counter}`,
                 label: `Step ${this.counter}`,

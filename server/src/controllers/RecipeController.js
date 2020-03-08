@@ -55,7 +55,9 @@ module.exports = {
             const recipe = await Recipe.create(req.body.information)
                 .then(async function(createdRecipe) {
                     // Adding ingredients
+                    // Mapping does not work, use a loop instead
                     for (const ingredient of ingredients) {
+                        // Check if already exists
                         await Ingredient.count({
                             where: {
                                 title: ingredient
@@ -83,9 +85,10 @@ module.exports = {
 
                     // Adding steps
                     for (const step of steps) {
+                        // Check if already exists
                         await Step.count({
                             where: {
-                                title: step
+                                title: step.title
                             }
                         }).then(async function (count) {
                             // Does already exist
@@ -93,18 +96,18 @@ module.exports = {
                                 // Return this data into the function
                                 return Step.findOne({
                                     where: {
-                                        title: step
+                                        title: step.title
                                     }
                                 })
                             } else {
                                 // Create the step and return this
                                 return Step.create({
-                                    title: step
+                                    title: step.title,
                                 })
                             }
                         }).then(async function (createdStep) {
                             // Add this data into the RecipeStep table
-                            return createdRecipe.addStep(createdStep)
+                            return createdRecipe.addStep(createdStep, {through: {photo: step.photo}})
                         })
                     }
                 })
