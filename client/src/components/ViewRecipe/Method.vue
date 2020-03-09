@@ -65,9 +65,17 @@ export default {
             this.recipe.Steps.map(
                 step => this.steps.push({
                 'title': step.title,
-                'photo': step.RecipeStep.photo
+                'photo': step.RecipeStep.photo,
+
+                // Need the RecipeStep id in the array to then sort by this
+                'id': step.RecipeStep.id
                 }),
             )
+
+            // Reshuffle the array to order by RecipeStep id
+            this.steps.sort(function(a, b) {
+                return a.id - b.id
+            })
         }
     }
 }
