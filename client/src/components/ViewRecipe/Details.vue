@@ -56,14 +56,15 @@
                                     <v-col
                                         cols="6"
                                         class="pb-0">
-                                        <p class="bold-text">Prep:</p>
-                                        <p class="bold-text">Cook:</p>
+                                        <p class="bold-text">Prep: 20 mins</p>
+                                        <p class="bold-text">Cook: 30 mins</p>
                                     </v-col>
 
                                     <v-col
                                         cols="6"
-                                        align-self="center">
-                                        <p class="no-margin bold-text">Eaten:</p>
+                                        class="pb-0">
+                                        <p class="bold-text">Cuisine: Japanese</p>
+                                        <p class="bold-text">Mood: Sexy</p>
                                     </v-col>
                                 </v-row>
                             </div>

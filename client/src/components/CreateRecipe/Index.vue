@@ -4,6 +4,7 @@
 
         <v-container fill-height fluid>
             <recipe-info />
+            <recipe-time />
             <recipe-ingredients />
             <recipe-method />
         </v-container>
@@ -15,13 +16,15 @@ import PageHeader from '@/components/Header'
 import RecipeInfo from '@/components/CreateRecipe/Info'
 import RecipeIngredients from '@/components/CreateRecipe/Ingredients'
 import RecipeMethod from '@/components/CreateRecipe/Method'
+import RecipeTime from '@/components/CreateRecipe/Time'
 
 export default {
     components: {
         PageHeader,
         RecipeInfo,
         RecipeIngredients,
-        RecipeMethod
+        RecipeMethod,
+        RecipeTime
     },
 }
 </script>
