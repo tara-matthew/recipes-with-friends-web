@@ -157,6 +157,43 @@ export default {
             EventBus.$emit('sendRecipe', this.recipe)
         },
 
+        getFirstWord(ingredients) {
+            ingredients = ingredients.split(" ");
+            // console.log(ingredients);
+            return ingredients[0];
+        },
+
+        returnRestOfString(ingredients) {
+            ingredients = ingredients.split(" ");
+            let remainingIngredients = [];
+            //TODO start at 0 and use modulus here or slice the array
+            for (var i = 1; i < ingredients.length; i++) {
+                remainingIngredients[i-1] = ingredients[i]
+            }
+            // console.log(remainingIngredients);
+            return remainingIngredients;
+        },
+
+        // Recursion!
+        checkForMeasurement(restOfString, acceptedMeasurements) {
+            for (var property in acceptedMeasurements) {
+                if (acceptedMeasurements[property].length < 1) {
+                    return restOfString;
+                } else if (acceptedMeasurements[property][0] == restOfString[0]) {
+                    return this.checkForMeasurement(
+                        restOfString.slice(1),
+                        {'0': acceptedMeasurements[property].slice(1)}
+                    );
+                }
+            }
+
+            return false;
+        },
+
+        isNumeric(obj) {
+            return !isNaN(parseFloat(obj)) && isFinite(obj)
+        },
+
         async saveRecipe() {
             this.error = null
 
@@ -168,9 +205,47 @@ export default {
                 this.error = 'Your recipe needs a title'
                 return
             }
+            let firstWord = [];
+            let restOfString = [];
+            let measurement = [];
+            let stringAfterMeasurement = [];
+
+            let acceptedMeasurements = {
+                '0': ['grams'],
+                '1': ['g'],
+                '2': ['kilograms'],
+                '3': ['kg'],
+                '4': ['fluid', 'ounces'],
+                '5': ['teaspoons'],
+                '6': ['pint'],
+                '7': ['pints'],
+                '8': ['mg'],
+                '9': ['pound'],
+                '10': ['lb'],
+                '11': ['three', 'things', 'here'],
+                '12': ['this', 'is', 'four', 'things']
+            };
 
             // Regex to remove whitespace and split ingredients into an array
-            this.recipe.ingredients = this.recipe.ingredients.split(/[ ,]+/)
+            this.recipe.ingredients = this.recipe.ingredients.split(', ');
+            for (var i = 0; i < this.recipe.ingredients.length; i ++) {
+                firstWord[i] = this.getFirstWord(this.recipe.ingredients[i]);
+                if (this.isNumeric(firstWord[i])) {
+                    console.log('First word is a number!');
+                    restOfString[i] = this.returnRestOfString(this.recipe.ingredients[i]);
+                    measurement[i] = this.checkForMeasurement(restOfString[i], acceptedMeasurements);
+                    if (measurement[i]) {
+                        stringAfterMeasurement[i] = (measurement[i].length >= 1 ? measurement[i]: 'Where is the ingredient?');
+                    } else {
+                        stringAfterMeasurement[i] = 'The rest of the string is the ingredient';
+                    }
+                } else {
+                    stringAfterMeasurement[i] = 'Unit of measurement is in the first word. The rest is the ingredient';
+                }
+            }
+            console.log(stringAfterMeasurement);
+
+            // New functionality here
 
             try {
                 await RecipeService.post(this.recipe)
