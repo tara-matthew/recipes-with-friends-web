@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Measurement.associate = function(models) {
-        Measurement.belongsTo(models.RecipeIngredient)
+        Measurement.hasMany(models.RecipeIngredient)
     }
 
     return Measurement

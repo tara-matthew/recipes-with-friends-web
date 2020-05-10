@@ -50,6 +50,12 @@ sequelize.sync({force:true})
         )
 
         await Promise.all(
+            measurements.map(measurement => {
+                Measurement.create(measurement)
+            })
+        )
+
+        await Promise.all(
             recipeIngredients.map(recipeIngredient => {
                 RecipeIngredient.create(recipeIngredient)
             })
@@ -64,12 +70,6 @@ sequelize.sync({force:true})
         await Promise.all(
             recipeSteps.map(recipeStep => {
                 RecipeStep.create(recipeStep)
-            })
-        )
-
-        await Promise.all(
-            measurements.map(measurement => {
-                Measurement.create(measurement)
             })
         )
     })
