@@ -44,6 +44,8 @@ export default {
                 mainPhoto: ''
             },
             ingredients: '',
+            splitIngredients: [],
+
             steps: [{
                 'title': '',
                 'photo': ''

@@ -61,6 +61,7 @@
                     mainPhoto: ''
                 },
                 ingredients: '',
+                splitIngredients: [],
                 steps: [{
                     'title': '',
                     'photo': ''

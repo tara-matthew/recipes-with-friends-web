@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        }
+        },
+        amount: DataTypes.INTEGER
     }, {
         freezeTableName: true
     })

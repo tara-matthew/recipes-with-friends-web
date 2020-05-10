@@ -101,6 +101,7 @@ export default {
                mainPhoto: ''
            },
            ingredients: '',
+           splitIngredients: [],
            steps: [{
                'title': '',
                'photo': ''
@@ -175,12 +176,12 @@ export default {
         },
 
         // Recursion!
-        checkForMeasurement(restOfString, acceptedMeasurements) {
+        extractIngredient(restOfString, acceptedMeasurements) {
             for (var property in acceptedMeasurements) {
                 if (acceptedMeasurements[property].length < 1) {
                     return restOfString;
                 } else if (acceptedMeasurements[property][0] == restOfString[0]) {
-                    return this.checkForMeasurement(
+                    return this.extractIngredient(
                         restOfString.slice(1),
                         {'0': acceptedMeasurements[property].slice(1)}
                     );
@@ -198,16 +199,18 @@ export default {
             this.error = null
 
             // Check that a title has been entered
-            const hasTitle = (Object
-                .values(this.recipe)[0]['title'].length) > 0
+            // const hasTitle = (Object
+            //     .values(this.recipe)[0]['title'].length) > 0
 
-            if (!hasTitle) {
-                this.error = 'Your recipe needs a title'
-                return
-            }
+            // if (!hasTitle) {
+            //     this.error = 'Your recipe needs a title'
+            //     return
+            // }
+
             let firstWord = [];
             let restOfString = [];
             let measurement = [];
+            let extractedIngredient = [];
             let stringAfterMeasurement = [];
 
             let acceptedMeasurements = {
@@ -233,25 +236,36 @@ export default {
                 if (this.isNumeric(firstWord[i])) {
                     console.log('First word is a number!');
                     restOfString[i] = this.returnRestOfString(this.recipe.ingredients[i]);
-                    measurement[i] = this.checkForMeasurement(restOfString[i], acceptedMeasurements);
-                    if (measurement[i]) {
-                        stringAfterMeasurement[i] = (measurement[i].length >= 1 ? measurement[i]: 'Where is the ingredient?');
+                    extractedIngredient[i] = this.extractIngredient(restOfString[i], acceptedMeasurements);
+                    if (extractedIngredient[i]) {
+                        stringAfterMeasurement[i] = (extractedIngredient[i].length >= 1 ? extractedIngredient[i] : 'Where is the ingredient?');
+                        measurement[i] = this.recipe.ingredients[i].split(' ').slice(1, -extractedIngredient[i].length).join(' ')
                     } else {
-                        stringAfterMeasurement[i] = 'The rest of the string is the ingredient';
+                        stringAfterMeasurement[i] = this.recipe.ingredients[i].split(' ').slice(1);
                     }
                 } else {
                     stringAfterMeasurement[i] = 'Unit of measurement is in the first word. The rest is the ingredient';
                 }
+
+                this.recipe.splitIngredients.push({
+                    'amount': '',
+                    'measurement': '',
+                    'item': ''
+                })
+                this.recipe.splitIngredients[i].amount = firstWord[i]
+                this.recipe.splitIngredients[i].measurement = measurement[i]
+                this.recipe.splitIngredients[i].item = stringAfterMeasurement[i].join(' ')
             }
-            console.log(stringAfterMeasurement);
+            // console.log(stringAfterMeasurement)
+            // console.log(this.recipe.splitIngredients)
 
             // New functionality here
 
             try {
                 await RecipeService.post(this.recipe)
-                this.$router.push({
-                    name: 'recipes'
-                })
+                // this.$router.push({
+                //     name: 'recipes'
+                // })
             } catch(error) {
                 console.log(error)
             }
