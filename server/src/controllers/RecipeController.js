@@ -1,4 +1,4 @@
-const {Recipe, Ingredient, Step, RecipeIngredient} = require ('../models')
+const {Recipe, Ingredient, Step, RecipeIngredient, Measurement} = require ('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
@@ -50,8 +50,7 @@ module.exports = {
     async post(req, res) {
         try {
             var ingredients = req.body.splitIngredients
-            console.log(req.body)
-            // var steps = req.body.steps
+            var steps = req.body.steps
 
             const recipe = await Recipe.create(req.body.information)
                 .then(async function(createdRecipe) {
@@ -82,61 +81,49 @@ module.exports = {
                             // Add this data into the RecipeIngredient table
                             return createdRecipe.addIngredient(createdIngredient, {through: {amount: ingredient.amount}})
                         }).then(async function(createdRecipeIngredient) {
-                            // console.log(createdRecipe.getDataValue('id'))
-                            console.log(createdRecipeIngredient[0].getDataValue('RecipeId'))
-                            // console.log(createdRecipeIngredient.RecipeId)
-                            const recipeId = createdRecipeIngredient[0].getDataValue('RecipeId')
-                            const ingredientId = createdRecipeIngredient[0].getDataValue('IngredientId')
-                            // console.log(recipeId, ingredientId)
-                            const recipeIngredient = await RecipeIngredient.findOne({
+                            // Find the matching ingredient
+                            await Measurement.findOne({
                                 where: {
-                                    RecipeId: recipeId,
-                                    IngredientId: ingredientId
+                                    title: ingredient.measurement
                                 }
+                            }).then(async function (createdMeasurement) {
+                                const measurementId = createdMeasurement.getDataValue('id')
+                                // Write the measurementId to the recipeIngredient table
+                                createdRecipeIngredient[0].setDataValue('MeasurementId', measurementId)
+
+                                // Save this
+                                return createdRecipeIngredient[0].save()
                             })
-                            // console.log(recipeIngredient)
-                            return recipeIngredient
-                            // console.log(recipeIngredient)
-                            }).then(async function(theRecipeIngredient) {
-                                console.log(theRecipeIngredient)
-                                // console.log(theRecipeIngredient.getDataValue('RecipeId'))
-                                theRecipeIngredient.setDataValue('MeasurementId', 2)
-                                // theRecipeIngredient.save();
-                                // console.log(theRecipeIngredient)
-                                return theRecipeIngredient.save()
-                                // theRecipeIngredient.MeasurementId = 1
-                            }).then (async function(saved) {
-                                console.log(saved)
-                            })
+                        })
                     }
 
                     // Adding steps
-                //     for (const step of steps) {
-                //         // Check if already exists
-                //         await Step.count({
-                //             where: {
-                //                 title: step.title
-                //             }
-                //         }).then(async function (count) {
-                //             // Does already exist
-                //             if (count > 0) {
-                //                 // Return this data into the function
-                //                 return Step.findOne({
-                //                     where: {
-                //                         title: step.title
-                //                     }
-                //                 })
-                //             } else {
-                //                 // Create the step and return this
-                //                 return Step.create({
-                //                     title: step.title,
-                //                 })
-                //             }
-                //         }).then(async function (createdStep) {
-                //             // Add this data into the RecipeStep table
-                //             return createdRecipe.addStep(createdStep, {through: {photo: step.photo}})
-                //         })
-                //     }
+                    for (const step of steps) {
+                        // Check if already exists
+                        await Step.count({
+                            where: {
+                                title: step.title
+                            }
+                        }).then(async function (count) {
+                            // Does already exist
+                            if (count > 0) {
+                                // Return this data into the function
+                                return Step.findOne({
+                                    where: {
+                                        title: step.title
+                                    }
+                                })
+                            } else {
+                                // Create the step and return this
+                                return Step.create({
+                                    title: step.title,
+                                })
+                            }
+                        }).then(async function (createdStep) {
+                            // Add this data into the RecipeStep table
+                            return createdRecipe.addStep(createdStep, {through: {photo: step.photo}})
+                        })
+                    }
                 })
             //Once this is all done return to home dashboard
             res.send(recipe)
