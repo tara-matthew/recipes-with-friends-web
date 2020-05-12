@@ -82,15 +82,24 @@ module.exports = {
                             return createdRecipe.addIngredient(createdIngredient, {through: {amount: ingredient.amount}})
                         }).then(async function(createdRecipeIngredient) {
                             // Find the matching ingredient
-                            await Measurement.findOne({
+                            await Measurement.count({
                                 where: {
                                     title: ingredient.measurement
                                 }
+                            }).then(async function(count) {
+                                if (count > 0) {
+                                    return Measurement.findOne({
+                                        where: {
+                                            title: ingredient.measurement
+                                        }
+                                    })
+                                }
                             }).then(async function (createdMeasurement) {
-                                const measurementId = createdMeasurement.getDataValue('id')
-                                // Write the measurementId to the recipeIngredient table
-                                createdRecipeIngredient[0].setDataValue('MeasurementId', measurementId)
-
+                                if (createdMeasurement) {
+                                    const measurementId = createdMeasurement.getDataValue('id')
+                                    // Write the measurementId to the recipeIngredient table
+                                    createdRecipeIngredient[0].setDataValue('MeasurementId', measurementId)
+                                }
                                 // Save this
                                 return createdRecipeIngredient[0].save()
                             })
