@@ -173,22 +173,28 @@ module.exports = {
             })
 
                 .map(function(recipes) {
-                    const recipeTitle = recipes.getDataValue('title')
-                    const recipeStory = recipes.getDataValue('story')
+
 
                     const json = recipes.toJSON()
-                    json.recipeTitle = {recipeTitle}
-                    json.recipeStory = {recipeStory}
+                    console.log(json.Steps)
+                    json.recipeInfo =
+                        {
+                            'recipeTitle': json.title,
+                            'recipeStory': json.story,
+                            'recipePhoto': json.photo
+                        }
 
-                    return (_.merge(
+                    const merged = (_.merge(
                         {},
-                        json.recipeTitle,
+                        json.recipeInfo,
+                        json.Steps,
                         json.Ingredients,
-                        json.recipeStory,
                         json.RecipeIngredients
                     ))
+
+                    return merged
                 })
-            res.send(recipe)
+            res.send(recipe[0])
         } catch(error) {
             res.status(500).send({
                 error: error
