@@ -2,6 +2,9 @@ const {Recipe, Ingredient, Step, RecipeIngredient, Measurement} = require ('../m
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
+const _ = require('lodash')
+
+
 module.exports = {
 
     async index(req, res) {
@@ -152,21 +155,40 @@ module.exports = {
                 },
                 include: [
                     {
-
                         model: Ingredient,
+                        through: {attributes: []}
                     },
                     {
                         model: RecipeIngredient,
 
-                    include: {
-                        model: Measurement
+                        include: {
+                            model: Measurement
+                        }
+                    },
+
+                    {
+                        model: Step,
                     }
-
-
-                }]
+                ]
             })
-            // console.log(recipe)
-            res.send(recipe[0])
+
+                .map(function(recipes) {
+                    const recipeTitle = recipes.getDataValue('title')
+                    const recipeStory = recipes.getDataValue('story')
+
+                    const json = recipes.toJSON()
+                    json.recipeTitle = {recipeTitle}
+                    json.recipeStory = {recipeStory}
+
+                    return (_.merge(
+                        {},
+                        json.recipeTitle,
+                        json.Ingredients,
+                        json.recipeStory,
+                        json.RecipeIngredients
+                    ))
+                })
+            res.send(recipe)
         } catch(error) {
             res.status(500).send({
                 error: error
