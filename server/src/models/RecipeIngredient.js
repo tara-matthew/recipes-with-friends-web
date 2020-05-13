@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
 
     RecipeIngredient.associate = function(models) {
         RecipeIngredient.belongsTo(models.Measurement)
+        RecipeIngredient.belongsTo(models.Recipe)
     }
-
 
     return RecipeIngredient
 }

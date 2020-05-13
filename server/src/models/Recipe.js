@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     Recipe.associate = function(models) {
         Recipe.belongsToMany(models.Ingredient, { through: 'RecipeIngredient'})
         Recipe.belongsToMany(models.Step, { through: 'RecipeStep'})
+        Recipe.hasMany(models.RecipeIngredient)
     }
 
     return Recipe

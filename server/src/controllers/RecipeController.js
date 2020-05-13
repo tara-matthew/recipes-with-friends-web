@@ -152,17 +152,24 @@ module.exports = {
                 },
                 include: [
                     {
+
                         model: Ingredient,
                     },
                     {
-                        model: Step
+                        model: RecipeIngredient,
+
+                    include: {
+                        model: Measurement
                     }
-                ],
+
+
+                }]
             })
+            // console.log(recipe)
             res.send(recipe[0])
         } catch(error) {
             res.status(500).send({
-                error: 'Could not retrieve recipe'
+                error: error
             })
         }
     }
