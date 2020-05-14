@@ -171,28 +171,35 @@ module.exports = {
                     }
                 ]
             })
+            .map(function(recipes) {
 
-                .map(function(recipes) {
+                console.log(recipes)
+
+                const json = recipes.toJSON()
+                const measurements = []
+                // console.log(json.RecipeIngredients)
+                // console.log(measurements)
+                for (const property in json.RecipeIngredients) {
+                    // console.log(json.RecipeIngredients[property])
+                    measurements.push({
+                        'measurement': json.RecipeIngredients[property].Measurement,
+                        'amount': json.RecipeIngredients[property].amount
+                    })
+                }
 
 
-                    const json = recipes.toJSON()
-                    console.log(json.Steps)
-                    json.recipeInfo =
-                        {
-                            'recipeTitle': json.title,
-                            'recipeStory': json.story,
-                            'recipePhoto': json.photo
-                        }
+                json.recipeInfo =
+                    {
+                        'recipeTitle': json.title,
+                        'recipeStory': json.story,
+                        'recipePhoto': json.photo,
+                        'recipeIngredients': json.Ingredients,
+                        'recipeMeasurements': measurements,
+                        'recipeSteps': json.Steps
+                    }
 
-                    const merged = (_.merge(
-                        {},
-                        json.recipeInfo,
-                        json.Steps,
-                        json.Ingredients,
-                        json.RecipeIngredients
-                    ))
+                return json.recipeInfo
 
-                    return merged
                 })
             res.send(recipe[0])
         } catch(error) {
