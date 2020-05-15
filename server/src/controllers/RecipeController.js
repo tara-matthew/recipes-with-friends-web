@@ -196,9 +196,32 @@ module.exports = {
 
             })
 
-            recipe.push(recipeIngredient)
+            const json = recipe.map(function(recipeJson) {
+                recipeJson = recipeJson.toJSON()
 
-            res.send(recipe)
+                return recipeJson
+            })
+
+            json[0]['RecipeIngredients'] = recipeIngredient
+
+            // const ingredients = json[0].Ingredients.map(function(ingredientJson) {
+            //     const ings = ingredientJson['RecipeIngredients'] = recipeIngredient
+            //
+            //     return ings
+            // })
+
+            console.log(json)
+
+
+            // recipe.push(recipeIngredient)
+            // recipe.push(recipeIngredient)
+
+            // console.log(recipe)
+
+
+            // recipe.push(recipeIngredient)
+
+            res.send(json)
         } catch(error) {
             res.status(500).send({
                 error: error
