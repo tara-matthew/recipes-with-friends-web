@@ -204,13 +204,13 @@ module.exports = {
 
             json[0]['RecipeIngredients'] = recipeIngredient
 
-            // const ingredients = json[0].Ingredients.map(function(ingredientJson) {
-            //     const ings = ingredientJson['RecipeIngredients'] = recipeIngredient
-            //
-            //     return ings
-            // })
 
-            console.log(json)
+            for (var key in json[0]['Ingredients']) {
+                console.log(json[0]['Ingredients'][key])
+                json[0]['Ingredients'][key]['recipeIngredient'] = recipeIngredient[key]
+            }
+
+            // console.log(json)
 
 
             // recipe.push(recipeIngredient)
