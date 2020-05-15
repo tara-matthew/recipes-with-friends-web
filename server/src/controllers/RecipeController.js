@@ -158,50 +158,47 @@ module.exports = {
                         model: Ingredient,
                         through: {attributes: []}
                     },
-                    {
-                        model: RecipeIngredient,
-
-                        include: {
-                            model: Measurement
-                        }
-                    },
+                    // {
+                    //     model: RecipeIngredient,
+                    //
+                    //     include: {
+                    //         model: Measurement
+                    //     }
+                    // },
 
                     {
                         model: Step,
                     }
                 ]
             })
-            .map(function(recipes) {
 
-                console.log(recipes)
 
-                const json = recipes.toJSON()
-                const measurements = []
-                // console.log(json.RecipeIngredients)
-                // console.log(measurements)
-                for (const property in json.RecipeIngredients) {
-                    // console.log(json.RecipeIngredients[property])
-                    measurements.push({
-                        'measurement': json.RecipeIngredients[property].Measurement,
-                        'amount': json.RecipeIngredients[property].amount
-                    })
+            const theIngredientsPart = recipe.map(function(recipes) {
+
+                const ingredientsSection = recipes.Ingredients
+
+                const theIngredients = ingredientsSection.map(function(ingredients) {
+                    return ingredients.id
+                })
+                return theIngredients
+
+            })
+
+            const recipeIngredient = await RecipeIngredient.findAll({
+                where: {
+                    IngredientId: {
+                        [Op.in]: theIngredientsPart[0]
+                    },
+                    RecipeId: recipeId
+                }, include: {
+                    model: Measurement
                 }
 
+            })
 
-                json.recipeInfo =
-                    {
-                        'recipeTitle': json.title,
-                        'recipeStory': json.story,
-                        'recipePhoto': json.photo,
-                        'recipeIngredients': json.Ingredients,
-                        'recipeMeasurements': measurements,
-                        'recipeSteps': json.Steps
-                    }
+            recipe.push(recipeIngredient)
 
-                return json.recipeInfo
-
-                })
-            res.send(recipe[0])
+            res.send(recipe)
         } catch(error) {
             res.status(500).send({
                 error: error
