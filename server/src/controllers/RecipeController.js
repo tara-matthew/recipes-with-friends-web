@@ -148,6 +148,7 @@ module.exports = {
 
     async show(req,res) {
         try {
+            // Find which recipe this is
             const recipeId = req.params.recipeId
             const recipe = await Recipe.findAll({
                 where: {
@@ -158,7 +159,6 @@ module.exports = {
                         model: Ingredient,
                         through: {attributes: []}
                     },
-                    
 
                     {
                         model: Step,
@@ -166,6 +166,7 @@ module.exports = {
                 ]
             })
 
+            // Get the ingredients from the recipe
 
             const theIngredientsPart = recipe.map(function(recipes) {
 
@@ -178,6 +179,8 @@ module.exports = {
 
             })
 
+            // Find the RecipeIngredient entries which match the ingredients in the recipe
+            // Measurement is associated with this table, so we can get this data from this query
             const recipeIngredient = await RecipeIngredient.findAll({
                 where: {
                     IngredientId: {
@@ -190,17 +193,17 @@ module.exports = {
 
             })
 
+            // Convert to json so we can manipulate the data
             const json = recipe.map(function(recipeJson) {
                 recipeJson = recipeJson.toJSON()
 
                 return recipeJson
             })
 
-
+            // Set each ingredient to have the amount and measurement data from the RecipeIngredient join table
             for (var key in json[0]['Ingredients']) {
                 json[0]['Ingredients'][key]['amount'] = recipeIngredient[key].amount
                 json[0]['Ingredients'][key]['measurement'] = recipeIngredient[key].Measurement != null ? recipeIngredient[key].Measurement.title : null
-
             }
 
             res.send(json[0])
