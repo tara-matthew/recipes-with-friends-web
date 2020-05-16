@@ -158,13 +158,7 @@ module.exports = {
                         model: Ingredient,
                         through: {attributes: []}
                     },
-                    // {
-                    //     model: RecipeIngredient,
-                    //
-                    //     include: {
-                    //         model: Measurement
-                    //     }
-                    // },
+                    
 
                     {
                         model: Step,
@@ -202,26 +196,14 @@ module.exports = {
                 return recipeJson
             })
 
-            json[0]['RecipeIngredients'] = recipeIngredient
-
 
             for (var key in json[0]['Ingredients']) {
-                console.log(json[0]['Ingredients'][key])
-                json[0]['Ingredients'][key]['recipeIngredient'] = recipeIngredient[key]
+                json[0]['Ingredients'][key]['amount'] = recipeIngredient[key].amount
+                json[0]['Ingredients'][key]['measurement'] = recipeIngredient[key].Measurement != null ? recipeIngredient[key].Measurement.title : null
+
             }
 
-            // console.log(json)
-
-
-            // recipe.push(recipeIngredient)
-            // recipe.push(recipeIngredient)
-
-            // console.log(recipe)
-
-
-            // recipe.push(recipeIngredient)
-
-            res.send(json)
+            res.send(json[0])
         } catch(error) {
             res.status(500).send({
                 error: error
