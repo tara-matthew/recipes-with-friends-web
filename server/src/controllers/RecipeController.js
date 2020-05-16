@@ -163,7 +163,7 @@ module.exports = {
                     {
                         model: Step,
                     }
-                ]
+                ],
             })
 
             // Get the ingredients from the recipe
@@ -182,6 +182,9 @@ module.exports = {
             // Find the RecipeIngredient entries which match the ingredients in the recipe
             // Measurement is associated with this table, so we can get this data from this query
             const recipeIngredient = await RecipeIngredient.findAll({
+                // This needs to be ordered correctly
+                order: [["id", "asc"]],
+
                 where: {
                     IngredientId: {
                         [Op.in]: theIngredientsPart[0]
@@ -189,8 +192,7 @@ module.exports = {
                     RecipeId: recipeId
                 }, include: {
                     model: Measurement
-                }
-
+                },
             })
 
             // Convert to json so we can manipulate the data
