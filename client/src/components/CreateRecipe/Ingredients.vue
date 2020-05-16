@@ -55,6 +55,10 @@ export default {
         error: null
     }),
 
+    props: [
+        'acceptedMeasurements'
+    ],
+
     mounted() {
         //Set recipe to the value which has bveen received from Info.vue
         EventBus.$on('sendRecipe', recipe => {

@@ -97,6 +97,10 @@
             error: null
         }),
 
+        props: [
+            'acceptedMeasurements'
+        ],
+
         components: {
             vueDropzone: vue2Dropzone
         },

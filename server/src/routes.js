@@ -4,6 +4,8 @@ const UploadController = require ('./controllers/UploadController')
 const RecipeController = require ('./controllers/RecipeController')
 const BookmarkController = require ('./controllers/BookmarkController')
 const HistoryController = require ('./controllers/HistoryController')
+const MeasurementController = require ('./controllers/MeasurementController')
+
 
 module.exports = (app) => {
     app.post('/register',
@@ -40,5 +42,8 @@ module.exports = (app) => {
 
     app.get('/histories',
         HistoryController.index)
+
+    app.get('/measurements',
+        MeasurementController.index)
 
 }

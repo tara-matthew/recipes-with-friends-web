@@ -115,6 +115,10 @@ export default {
         }],
     }),
 
+    props: [
+        'acceptedMeasurements'
+    ],
+
     mounted() {
         EventBus.$on('sendRecipe', recipe => {
             this.recipe = recipe

@@ -3,10 +3,10 @@
         <page-header />
 
         <v-container fill-height fluid>
-            <recipe-info />
-            <recipe-time />
-            <recipe-ingredients />
-            <recipe-method />
+            <recipe-info v-if="acceptedMeasurements" :acceptedMeasurements="acceptedMeasurements" />
+            <recipe-time v-if="acceptedMeasurements" :acceptedMeasurements="acceptedMeasurements" />
+            <recipe-ingredients v-if="acceptedMeasurements" :acceptedMeasurements="acceptedMeasurements" />
+            <recipe-method v-if="acceptedMeasurements" :acceptedMeasurements="acceptedMeasurements" />
         </v-container>
     </div>
 </template>
@@ -17,8 +17,14 @@ import RecipeInfo from '@/components/CreateRecipe/Info'
 import RecipeIngredients from '@/components/CreateRecipe/Ingredients'
 import RecipeMethod from '@/components/CreateRecipe/Method'
 import RecipeTime from '@/components/CreateRecipe/Time'
+import MeasurementService from '@/services/MeasurementService'
 
 export default {
+    data() {
+        return {
+            acceptedMeasurements: []
+        }
+    },
     components: {
         PageHeader,
         RecipeInfo,
@@ -26,6 +32,11 @@ export default {
         RecipeMethod,
         RecipeTime
     },
+
+    async mounted() {
+        this.acceptedMeasurements = (await MeasurementService.index()).data
+    }
+
 }
 </script>
 
