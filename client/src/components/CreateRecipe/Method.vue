@@ -203,13 +203,15 @@ export default {
             this.error = null
 
             // Check that a title has been entered
-            // const hasTitle = (Object
-            //     .values(this.recipe)[0]['title'].length) > 0
+            const hasTitle = (Object
+                .values(this.recipe)[0]['title'].length) > 0
 
-            // if (!hasTitle) {
-            //     this.error = 'Your recipe needs a title'
-            //     return
-            // }
+            if (!hasTitle) {
+                this.error = 'Your recipe needs a title'
+                return
+            }
+
+            //TODO move this outside of the saveRecipe function? So all this evaluates and it's checked whether it has evaluated successfully before trying to save
 
             let firstWord = [];
             let restOfString = [];
@@ -217,22 +219,11 @@ export default {
             let extractedIngredient = [];
             let stringAfterMeasurement = [];
 
-            let acceptedMeasurements = {
-                '0': ['grams'],
-                '1': ['g'],
-                '2': ['kilograms'],
-                '3': ['kg'],
-                '4': ['fluid', 'ounces'],
-                '5': ['teaspoons'],
-                '6': ['pint'],
-                '7': ['pints'],
-                '8': ['mg'],
-                '9': ['pound'],
-                '10': ['lb'],
-                '11': ['three', 'things', 'here'],
-                '12': ['this', 'is', 'four', 'things']
-            };
+            let acceptedMeasurements = this.acceptedMeasurements
 
+            //TODO make this work if there is more than one space or a space at the end
+
+            //TODO Also make this code cleaner
             // Regex to remove whitespace and split ingredients into an array
             this.recipe.ingredients = this.recipe.ingredients.split(', ');
             for (var i = 0; i < this.recipe.ingredients.length; i ++) {
@@ -248,7 +239,7 @@ export default {
                         stringAfterMeasurement[i] = this.recipe.ingredients[i].split(' ').slice(1);
                     }
                 } else {
-                    stringAfterMeasurement[i] = 'Unit of measurement is in the first word. The rest is the ingredient';
+                    stringAfterMeasurement[i] = this.recipe.ingredients[i].split(' ').slice(1);
                 }
 
                 this.recipe.splitIngredients.push({
@@ -257,19 +248,21 @@ export default {
                     'item': ''
                 })
                 this.recipe.splitIngredients[i].amount = firstWord[i]
-                this.recipe.splitIngredients[i].measurement = measurement[i]
+
+                if (measurement[i]) {
+                    this.recipe.splitIngredients[i].measurement = measurement[i]
+                } else {
+                    this.recipe.splitIngredients[i].measurement = 'no measurement'
+                }
+
                 this.recipe.splitIngredients[i].item = stringAfterMeasurement[i].join(' ')
             }
-            // console.log(stringAfterMeasurement)
-            // console.log(this.recipe.splitIngredients)
-
-            // New functionality here
 
             try {
                 await RecipeService.post(this.recipe)
-                // this.$router.push({
-                //     name: 'recipes'
-                // })
+                this.$router.push({
+                    name: 'recipes'
+                })
             } catch(error) {
                 console.log(error)
             }

@@ -14,7 +14,7 @@
                     class="px-12 py-12">
                     <div class="inner-container">
 
-                        <p v-for="ingredient in ingredients" v-bind:key="ingredient.title">{{ingredient.amount}}{{ingredient.measurement}} {{ingredient.title}}</p>
+                        <p v-for="ingredient in ingredients" v-bind:key="ingredient.title">{{ingredient.amount}} {{ingredient.measurement}} {{ingredient.title}}</p>
 
                     </div>
                 </v-col>
@@ -50,39 +50,14 @@ export default {
 
     watch: {
         async recipe() {
-            // console.log(this.recipe)
-            for (const property in this.recipe) {
-                // console.log(this.recipe[property])
-                if (typeof(this.recipe[property]) == 'object') {
-                    this.ingredients.push({
-                        'title': this.recipe[property].title,
-                        'amount': this.recipe[property].amount,
-                        'measurement': (this.recipe[property].Measurement != null ? this.recipe[property].Measurement.title : '')
-                    })
-                }
-            }
 
-
-            console.log(this.ingredients)
-            // this.recipe.forEach(function(ingredient){
-            //     console.log(ingredient)
-            // })
-            // console.log(this.recipe.length)
-            // this.recipe.map(
-            //     ingredient => this.ingredients.push({
-            //         'title': ingredient.title
-            //     })
-            // )
-            // console.log(this.ingredients)
-            // this.recipe.Ingredients.map(
-            //     ingredient => this.ingredients.push({
-            //         'title': ingredient.title,
-            //         'measurement': ingredient.RecipeIngredients[0]
-            //     }),
-            //
-            // )
-
-            // console.log(this.recipe)
+            this.recipe.Ingredients.map(
+                ingredient => this.ingredients.push({
+                    'title': ingredient.title,
+                    'measurement': ingredient.measurement,
+                    'amount': ingredient.amount
+                })
+            )
 
         }
 
